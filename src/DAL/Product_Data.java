@@ -1,10 +1,9 @@
-package BL;
+package DAL;
 
 /**
  * Created by Shahar on 29/03/17.
  */
-
-public class CategoryManagement
+public class Product_Data
 {
 
 }
