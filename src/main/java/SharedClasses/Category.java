@@ -7,7 +7,24 @@ public class Category
 {
     private int id;
     private String name;
-    private int idFather;
+    private int idFather;  // -1 represents no ID
+
+    public Category(int id,String name)
+    {
+        this.id = id;
+        this.name = name;
+        idFather = -1;
+    }
+    public Category(int id, String name, int idFather)
+    {
+        this.id = id;
+        this.name = name;
+        this.idFather = idFather;
+    }
+    public Category()
+    {
+        id = 0;name = ""; idFather = 0;
+    }
 
     public Category(int id, String name, int idFather)
     {
@@ -38,5 +55,11 @@ public class Category
 
     public void setIdFather(int idFather) {
         this.idFather = idFather;
+    }
+
+    public boolean equals(Category category)
+    {
+        return category.id == this.id && category.idFather == this.idFather
+                && category.name.equals(this.name);
     }
 }

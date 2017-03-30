@@ -22,7 +22,7 @@ public class  Category_Data
             PreparedStatement _ps = connection.prepareStatement(query);
             _ps.setInt(1, c.getId());
             _ps.setString(2, c.getName());
-            _ps.setInt(3, c.getIdFather());
+            _ps.setString(3, c.getIdFather() == -1 ? "NULL" : ""+c.getIdFather());
             _ps.executeUpdate();
             return true;
 
@@ -43,12 +43,13 @@ public class  Category_Data
         {
             Statement state = connection.createStatement();
             ResultSet result = state.executeQuery(query);
+            category = new Category();
 
-            int cid = result.getInt("ID");
-            String name = result.getString("NAME");
-            int idFather = result.getInt("ID_FATHER");
+            category.setId(result.getInt("ID"));
+            category.setName(result.getString("NAME"));
+            category.setIdFather(result.getString("ID_FATHER").equals("NULL")
+            ? -1 : result.getInt("ID_FATHER"));
 
-            category = new Category(cid,name,idFather);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,6 +106,4 @@ public class  Category_Data
             return false;
         }
     }
-
-
 }

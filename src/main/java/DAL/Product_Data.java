@@ -22,9 +22,13 @@ public class Product_Data
     // ADD NEW PRODUCT TO DATABASE
     public boolean addProduct(Products p)
     {
-        String query = "INSERT INTO PRODUCTS(ID, LOCATION, MANUFACTURE, AMOUNT_STORE, AMOUNT_STORAGE, AMOUNT_DEFECT, MINIMAL_AMOUNT, CATEGORY_CODE) VALUES(?,?,?,?,?,?,?,?)";
+        String query1 = "INSERT INTO PRODUCTS(ID, LOCATION, MANUFACTURE, AMOUNT_STORE, AMOUNT_STORAGE, AMOUNT_DEFECT" +
+                ", MINIMAL_AMOUNT, CATEGORY_CODE) VALUES(?,?,?,?,?,?,?,?)";
+        String query2 = "INSERT INTO PRODUCTS_PRICE(ID,PRICE_COST,PRICE_SELL,DISCOUNT,DATE_START,DATE_END) " +
+                "VALUES(?,?,?,?,?,?)";
+
         try {
-            PreparedStatement _ps = connection.prepareStatement(query);
+            PreparedStatement _ps = connection.prepareStatement(query1);
 
             _ps.setInt(1,p.getId());
             _ps.setString(2,p.getLocation());
@@ -36,6 +40,18 @@ public class Product_Data
             _ps.setInt(8, p.getCatergoryCode());
 
             _ps.executeUpdate();
+
+            _ps = connection.prepareStatement(query2);
+
+            _ps.setInt(1,p.getId());
+            _ps.setInt(2,p.getBuyPrice());
+            _ps.setInt(3,p.getSellPrice());
+            _ps.setInt(4,p.getDiscount());
+            _ps.setString(5,p.getDateStartDiscount().toString());
+            _ps.setString(6,p.getDateEndDiscount().toString());
+
+            _ps.executeUpdate();
+
             return true;
 
         } catch (SQLException e)
