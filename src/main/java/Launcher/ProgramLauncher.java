@@ -1,3 +1,5 @@
+package Launcher;
+
 import BL.CategoryManagement;
 import BL.PriceManagement;
 import BL.ProductManagement;
@@ -17,7 +19,7 @@ public class ProgramLauncher
 {
     public static void main ( String [] args ) {
         //Initializing all layers. And DataBase
-        Connection conn = getConnectionAndInitDatabase();
+        Connection conn = getConnectionAndInitDatabase("stock.db");
 
         Category_Data categoryData = new Category_Data(conn);
         Product_Data productData = new Product_Data(conn);
@@ -37,14 +39,14 @@ public class ProgramLauncher
         }
 
     }
-    private static Connection getConnectionAndInitDatabase()
+    public static Connection getConnectionAndInitDatabase(String dataBaseName)
     {
         Connection c = null;
         Statement stmt = null;
         try {
             /*Opening Connection*/
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:stock.db");
+            c = DriverManager.getConnection("jdbc:sqlite:"+dataBaseName);
 
             /*Creating Tables if they are NOT existed */
             stmt = c.createStatement();

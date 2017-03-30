@@ -98,10 +98,10 @@ public class InputReader
                      printUpdate(ProductM.updateProductManufacture(prop));
                      break;
                  case 9:
-                     System.out.print("Enter properties in the following structure:\n" +
+                     /*System.out.print("Enter properties in the following structure:\n" +
                              "[ID] [NEW CURRENT AMOUNT]\n");
                      prop = scanner.nextLine();
-                     printUpdate(ProductM.updateProductCurrentAmount(prop));
+                     printUpdate(ProductM.updateProductCurrentAmount(prop));*/
                      break;
                  case 10:
                      System.out.print("Enter properties in the following structure:\n" +
@@ -114,6 +114,7 @@ public class InputReader
                              "[ID] [NEW AMOUNT IN STORE]\n");
                      prop = scanner.nextLine();
                      printUpdate(ProductM.updateProductAmountInStore(prop));
+
                      break;
                  case 12:
                      System.out.print("Enter properties in the following structure:\n" +
