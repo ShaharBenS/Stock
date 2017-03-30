@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -12,6 +13,16 @@ public class ProgramLauncher
         //Initializing all layers. And DataBase
         Connection conn = getConnectionAndInitDatabase();
 
+
+
+
+
+        //Close
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static Connection getConnectionAndInitDatabase()
