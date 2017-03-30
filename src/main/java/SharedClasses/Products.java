@@ -9,7 +9,7 @@ public class Products
     private String location;
     private String manufacture;
     private int currentAmount;
-    private int amountIntWarehouse;
+    private int amountInWarehouse;
     private int amountInStore;
     private int minimalAmount;
     private int defectAmount;
@@ -45,12 +45,12 @@ public class Products
         this.currentAmount = currentAmount;
     }
 
-    public int getAmountIntWarehouse() {
-        return amountIntWarehouse;
+    public int getAmountInWarehouse() {
+        return amountInWarehouse;
     }
 
-    public void setAmountIntWarehouse(int amountIntWarehouse) {
-        this.amountIntWarehouse = amountIntWarehouse;
+    public void setAmountInWarehouse(int amountIntWarehouse) {
+        this.amountInWarehouse = amountIntWarehouse;
     }
 
     public int getAmountInStore() {
