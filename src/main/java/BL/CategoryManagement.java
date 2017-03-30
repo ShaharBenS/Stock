@@ -1,5 +1,6 @@
 package BL;
 
+import DAL.Category_Data;
 import SharedClasses.Category;
 
 /**
@@ -8,6 +9,12 @@ import SharedClasses.Category;
 
 public class CategoryManagement
 {
+    private Category_Data _CD;
+    public CategoryManagement(Category_Data cd)
+    {
+        _CD = cd;
+    }
+
     public boolean addCategory(Category c)
     {
         return false;

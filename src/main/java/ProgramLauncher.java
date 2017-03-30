@@ -22,12 +22,11 @@ public class ProgramLauncher
         Category_Data categoryData = new Category_Data(conn);
         Product_Data productData = new Product_Data(conn);
 
-        CategoryManagement categoryManagement = new CategoryManagement();
-        PriceManagement priceManagement = new PriceManagement();
+        CategoryManagement categoryManagement = new CategoryManagement(categoryData);
+        PriceManagement priceManagement = new PriceManagement(productData);
         ProductManagement productManagement = new ProductManagement(productData);
 
-        InputReader inputReader = new InputReader(productManagement);
-        inputReader.start();
+        InputReader inputReader = new InputReader(productManagement,priceManagement,categoryManagement);
 
         //Close
         try {
@@ -35,9 +34,8 @@ public class ProgramLauncher
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
-
-
     private static Connection getConnectionAndInitDatabase()
     {
         Connection c = null;

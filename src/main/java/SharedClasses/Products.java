@@ -156,11 +156,11 @@ public class Products
 
     public void setDateStartDiscount(java.sql.Date date_start)
     {
-        date_start.getTime();
+        this.dateStartDiscount = new Date(date_start);
     }
 
     public void setDateEndDiscount(java.sql.Date date_end)
     {
-
+        this.dataEndDiscount = new Date(date_end);
     }
 }

@@ -1,5 +1,9 @@
 package BL;
 
+import DAL.Category_Data;
+import DAL.Product_Data;
+import SharedClasses.Category;
+
 import java.util.Date;
 
 /**
@@ -7,6 +11,12 @@ import java.util.Date;
  */
  public class PriceManagement
 {
+    private Product_Data _PD;
+
+    public PriceManagement(Product_Data pd)
+    {
+        _PD = pd;
+    }
 
     /* DATA FOR PRICES */
 

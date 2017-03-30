@@ -1,6 +1,10 @@
 package PL;
 
+import BL.CategoryManagement;
+import BL.PriceManagement;
 import BL.ProductManagement;
+
+import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -36,7 +40,7 @@ public class InputReader
                                     "21) Show all products",
                                     "22) Exit"};
 
-    public InputReader(ProductManagement pm)
+    public InputReader(ProductManagement pm, PriceManagement price_m, CategoryManagement cm)
     {
         this.ProductM = pm;
     }
