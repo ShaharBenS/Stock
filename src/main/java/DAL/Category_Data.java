@@ -2,7 +2,7 @@ package DAL;
 
 import SharedClasses.Category;
 
-import java.sql.Connection;
+import java.sql.*;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -17,25 +17,92 @@ public class  Category_Data
 
     public boolean addCategory(Category c)
     {
-        return false;
+        String query = "INSERT INTO CATEGORY(ID,NAME,ID_FATHER) VALUES(?,?,?)";
+        try {
+            PreparedStatement _ps = connection.prepareStatement(query);
+            _ps.setInt(1, c.getId());
+            _ps.setString(2, c.getName());
+            _ps.setInt(3, c.getIdFather());
+            _ps.executeUpdate();
+            return true;
+
+        } catch (SQLException e)
+        {
+            return false;
+        }
+
     }
     /*
         If category not found returns NULL
      */
     public Category getCategory(int id)
     {
-        return null;
+        String query = "SELECT * FROM CATEGORY WHERE ID = "+id+";";
+        Category category = null;
+        try
+        {
+            Statement state = connection.createStatement();
+            ResultSet result = state.executeQuery(query);
+            category = new Category();
+
+            category.setId(result.getInt("ID"));
+            category.setName(result.getString("NAME"));
+            category.setIdFather(result.getInt("ID_FATHER"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
     }
-    public boolean updateCategoryId(int id)
+    public boolean updateCategoryId(int id,int newID)
     {
-        return false;
+        String query = "UPDATE CATEGORY SET ID = ? WHERE ID = ?";
+        try {
+            PreparedStatement _ps = connection.prepareStatement(query);
+            _ps.setInt(1, newID);
+            _ps.setInt(2, id);
+            _ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
-    public boolean updateCategoryName(String name)
+    public boolean updateCategoryName(int id,String name)
     {
-        return false;
+        String query = "UPDATE CATEGORY SET NAME = ? WHERE ID = ?";
+        try {
+            PreparedStatement _ps = connection.prepareStatement(query);
+            _ps.setString(1, name);
+            _ps.setInt(2, id);
+            _ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
-    public boolean updateCategoryIdFather(int id)
+    public boolean updateCategoryIdFather(int id,int newFatherId)
     {
-        return false;
+        String query = "UPDATE CATEGORY SET ID_FATHER = ? WHERE ID = ?";
+        try {
+             PreparedStatement _ps = connection.prepareStatement(query);
+            _ps.setInt(1, newFatherId);
+            _ps.setInt(2, id);
+            _ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

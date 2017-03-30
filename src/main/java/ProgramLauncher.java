@@ -7,6 +7,7 @@ import PL.InputParser;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -18,9 +19,20 @@ public class ProgramLauncher
         //Initializing all layers. And DataBase
         Connection conn = getConnectionAndInitDatabase();
 
+
+
+        //Close
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
         CategoryManagement categoryManagement = new CategoryManagement();
         PriceManagement priceManagement = new PriceManagement();
         ProductManagement productManagement = new ProductManagement();
+
 
         Category_Data categoryData = new Category_Data();
         Product_Data productData = new Product_Data();
