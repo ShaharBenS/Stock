@@ -9,6 +9,13 @@ public class Category
     private String name;
     private int idFather;
 
+    public Category(int id, String name, int idFather)
+    {
+        this.id = id;
+        this.name = name;
+        this.idFather = idFather;
+    }
+
     public int getId() {
         return id;
     }

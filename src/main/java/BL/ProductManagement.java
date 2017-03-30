@@ -130,5 +130,11 @@ public class ProductManagement
         } catch(Exception e){ return  false; }
     }
 
+    public boolean updateCategoryDiscount(int id, int disc)
+    {
+        //TODO: need to do this too..
+        return false;
+    }
+
 
 }

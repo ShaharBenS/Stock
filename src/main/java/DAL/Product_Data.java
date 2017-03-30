@@ -149,6 +149,7 @@ public class Product_Data
         return updateColumnInProduct("MINIMAL_AMOUNT",id,amount);
     }
 
+
     /*
      * This method gets the name of the column the id of the products_price and the new value.
      */

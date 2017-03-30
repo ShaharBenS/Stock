@@ -10,6 +10,8 @@ public class InputReader
 {
     private Scanner scanner = new Scanner(System.in);
     private ProductManagement ProductM;
+    private PriceManagement PriceM;
+    private CategoryManagement CategoryM;
 
     private final String[] MENU = {"Choose an option:" ,
                                     "1) Add new Product" ,
@@ -22,24 +24,25 @@ public class InputReader
                                     "6) Update product ID" ,
                                     "7) Update product Location" ,
                                     "8) Update product Manufacture" ,
-                                    "9) Update product Current Amount" ,
-                                    "10) Update product Amount in Store" ,
-                                    "11) Update product Amount in Warehouse",
-                                    "12) Update product Minimal Amount" ,
-                                    "13) Update product Amount of Defects" ,
-                                    "14) Update product Category Code" ,
-                                    "15) Update product Buy Price" ,
-                                    "16) Update product Sell Price" ,
+                                    "9) Update product Amount in Store" ,
+                                    "10) Update product Amount in Warehouse",
+                                    "11) Update product Minimal Amount" ,
+                                    "12) Update product Amount of Defects" ,
+                                    "13) Update product Category Code" ,
+                                    "14) Update product Buy Price" ,
+                                    "15) Update product Sell Price" ,
                                     "** OTHER USEFUL OPERATIONS **",
-                                    "17) Add new Discount",
-                                    "18) Stock report by product ID",
-                                    "19) Stock report by category/ies",
-                                    "20) Defect products report",
-                                    "21) Show all products",
-                                    "22) Exit"};
+                                    "16) Add new Discount",
+                                    "17) Stock report by product ID",
+                                    "18) Stock report by category/ies",
+                                    "19) Defect products report",
+                                    "20) Show all products",
+                                    "21) Exit"};
 
     public InputReader(ProductManagement pm, PriceManagement price_m, CategoryManagement cm)
     {
+        this.CategoryM = cm;
+        this.PriceM = price_m;
         this.ProductM = pm;
     }
 
@@ -72,12 +75,30 @@ public class InputReader
                      else System.out.print(" >> Invalid arguments. Try again\n");
                      break;
                  case 2:
+                     System.out.print("Enter the Category properties (separated by 1 space!) in the following structure:\n" +
+                             "[ID] [NAME] [ID FATHER - optional]\n");
+                     String categoryLine = scanner.nextLine();
+                     if(CategoryM.addCategory(categoryLine))
+                         System.out.print(" >> Category added successfully\n");
+                     else System.out.print(" >> Invalid arguments. Try again\n");
                      break;
                  case 3:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW ID]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(CategoryM.updateCategoryId(prop));
                      break;
                  case 4:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW NAME]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(CategoryM.updateCategoryName(prop));
                      break;
                  case 5:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW ID FATHER]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(CategoryM.updateCategoryIdFather(prop));
                      break;
                  case 6:
                      System.out.print("Enter properties in the following structure:\n" +
@@ -99,43 +120,51 @@ public class InputReader
                      break;
                  case 9:
                      System.out.print("Enter properties in the following structure:\n" +
-                             "[ID] [NEW CURRENT AMOUNT]\n");
-                     prop = scanner.nextLine();
-                     printUpdate(ProductM.updateProductCurrentAmount(prop));
-                     break;
-                 case 10:
-                     System.out.print("Enter properties in the following structure:\n" +
                              "[ID] [NEW AMOUNT IN WAREHOUSE]\n");
                      prop = scanner.nextLine();
                      printUpdate(ProductM.updateProductAmountInWarehouse(prop));
                      break;
-                 case 11:
+                 case 10:
                      System.out.print("Enter properties in the following structure:\n" +
                              "[ID] [NEW AMOUNT IN STORE]\n");
                      prop = scanner.nextLine();
                      printUpdate(ProductM.updateProductAmountInStore(prop));
                      break;
-                 case 12:
+                 case 11:
                      System.out.print("Enter properties in the following structure:\n" +
                              "[ID] [NEW MINIMAL AMOUNT]\n");
                      prop = scanner.nextLine();
                      printUpdate(ProductM.updateProductMinimalAmount(prop));
                      break;
-                 case 13:
+                 case 12:
                      System.out.print("Enter properties in the following structure:\n" +
                              "[ID] [NEW AMOUNT OF DEFECTS]\n");
                      prop = scanner.nextLine();
                      printUpdate(ProductM.updateProductDefectAmount(prop));
                      break;
-                 case 14:
+                 case 13:
                      System.out.print("Enter properties in the following structure:\n" +
                              "[ID] [NEW CATEGORY CODE]\n");
                      prop = scanner.nextLine();
                      printUpdate(ProductM.updateProductCategoryCode(prop));
                      break;
+                 case 14:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW BUY PRICE]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(PriceM.updateBuyPrice(prop));
+                     break;
                  case 15:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW SELL PRICE]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(PriceM.updateSellPrice(prop));
                      break;
                  case 16:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID-of product or category] [DISCOUNT(in %)] [START DATE] [END DATE] **DATE FORM: DD.MM.YYYY\n");
+                     prop = scanner.nextLine();
+                     printUpdate(PriceM.addDiscount(prop));
                      break;
                  case 17:
                      break;
@@ -146,9 +175,9 @@ public class InputReader
                  case 20:
                      break;
                  case 21:
-                     break;
-                 case 22:
                      return; // EXITING!
+                 default: System.out.print("Invalid Operation!!! Try again...\n\n\n");
+                    break;
 
              }
             //Read Input:

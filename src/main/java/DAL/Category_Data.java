@@ -43,12 +43,12 @@ public class  Category_Data
         {
             Statement state = connection.createStatement();
             ResultSet result = state.executeQuery(query);
-            category = new Category();
 
-            category.setId(result.getInt("ID"));
-            category.setName(result.getString("NAME"));
-            category.setIdFather(result.getInt("ID_FATHER"));
+            int cid = result.getInt("ID");
+            String name = result.getString("NAME");
+            int idFather = result.getInt("ID_FATHER");
 
+            category = new Category(cid,name,idFather);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,4 +105,6 @@ public class  Category_Data
             return false;
         }
     }
+
+
 }
