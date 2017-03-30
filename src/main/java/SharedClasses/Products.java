@@ -1,5 +1,6 @@
 package SharedClasses;
 
+
 /**
  * Created by Shahar on 29/03/17.
  */
@@ -17,8 +18,8 @@ public class Products
 
     private int buyPrice;
     private int sellPrice;
-    private int dataStartDiscount;
-    private int dataEndDiscount;
+    private Date dateStartDiscount;
+    private Date dataEndDiscount;
     private int discount;
 
     public String getLocation() {
@@ -101,20 +102,21 @@ public class Products
         this.sellPrice = sellPrice;
     }
 
-    public int getDataStartDiscount() {
-        return dataStartDiscount;
+    public Date getDateStartDiscount() {
+        return new Date(dateStartDiscount);
     }
 
-    public void setDataStartDiscount(int dataStartDiscount) {
-        this.dataStartDiscount = dataStartDiscount;
+    public void setDateStartDiscount(Date dateStartDiscount)
+    {
+        this.dateStartDiscount = new Date(dateStartDiscount);
     }
 
-    public int getDataEndDiscount() {
-        return dataEndDiscount;
+    public Date getDateEndDiscount() {
+        return new Date(dataEndDiscount);
     }
 
-    public void setDataEndDiscount(int dataEndDiscount) {
-        this.dataEndDiscount = dataEndDiscount;
+    public void setDateEndDiscount(Date dataEndDiscount) {
+        this.dataEndDiscount = new Date(dataEndDiscount);
     }
 
     public int getDiscount() {
@@ -132,5 +134,15 @@ public class Products
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setDateStartDiscount(java.sql.Date date_start)
+    {
+        date_start.getTime();
+    }
+
+    public void setDateEndDiscount(java.sql.Date date_end)
+    {
+
     }
 }

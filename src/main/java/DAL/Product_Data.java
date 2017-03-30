@@ -1,6 +1,5 @@
 package DAL;
 
-import SharedClasses.Category;
 import SharedClasses.Products;
 
 import java.sql.*;
@@ -48,12 +47,14 @@ public class Product_Data
     //RETURN PRODUCT FROM DATABASE IF EXISTS, ELSE RETURN NULL
     public Products getProduct(int id)
     {
-        String query = "SELECT * FROM PRODUCTS WHERE ID = "+id+";";
+        String query1 = "SELECT * FROM PRODUCTS WHERE ID = "+id+";";
+        String query2 = "SELECT ID,PRICE_COST,PRICE_SELL,DISCOUNT,DATE_START,DATE_END FROM PRODUCTS_PRICE" +
+                "JOIN PRODUCTS WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID;";
         Products products = null;
         try
         {
             Statement state = connection.createStatement();
-            ResultSet result = state.executeQuery(query);
+            ResultSet result = state.executeQuery(query1);
             products = new Products();
 
             products.setId(result.getInt("ID"));
@@ -66,6 +67,14 @@ public class Product_Data
             products.setCatergoryCode(result.getInt("CATEGORY_CODE"));
             products.setCurrentAmount(products.getDefectAmount()+products.getAmountInStore()+products.getAmountInWarehouse());
 
+            state = connection.createStatement();
+            result = state.executeQuery(query2);
+
+            products.setBuyPrice(result.getInt("PRICE_COST"));
+            products.setSellPrice(result.getInt("PRICE_SELL"));
+            products.setDiscount(result.getInt("DISCOUNT"));
+            products.setDateStartDiscount(result.getDate("DATE_START"));
+            products.setDateEndDiscount(result.getDate("DATE_END"));
 
 
 
