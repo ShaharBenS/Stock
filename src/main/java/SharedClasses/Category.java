@@ -26,13 +26,6 @@ public class Category
         id = 0;name = ""; idFather = 0;
     }
 
-    public Category(int id, String name, int idFather)
-    {
-        this.id = id;
-        this.name = name;
-        this.idFather = idFather;
-    }
-
     public int getId() {
         return id;
     }
