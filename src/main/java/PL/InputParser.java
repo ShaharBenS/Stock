@@ -13,7 +13,7 @@ public class InputParser
     private PriceManagement priceM;
     private ProductManagement productM;
 
-    InputParser(CategoryManagement cm,PriceManagement price_m,ProductManagement product_m)
+    public InputParser(CategoryManagement cm, PriceManagement price_m, ProductManagement product_m)
     {
         CM = cm;
         priceM = price_m;

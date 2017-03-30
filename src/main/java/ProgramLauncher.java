@@ -1,3 +1,10 @@
+import BL.CategoryManagement;
+import BL.PriceManagement;
+import BL.ProductManagement;
+import DAL.Category_Data;
+import DAL.Product_Data;
+import PL.InputParser;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -7,13 +14,19 @@ import java.sql.Statement;
  */
 public class ProgramLauncher
 {
-    public static void main ( String [] args )
-    {
+    public static void main ( String [] args ) {
         //Initializing all layers. And DataBase
         Connection conn = getConnectionAndInitDatabase();
 
-    }
+        CategoryManagement categoryManagement = new CategoryManagement();
+        PriceManagement priceManagement = new PriceManagement();
+        ProductManagement productManagement = new ProductManagement();
 
+        Category_Data categoryData = new Category_Data();
+        Product_Data productData = new Product_Data();
+
+        InputParser inputParser = new InputParser(categoryManagement, priceManagement, productManagement);
+    }
     private static Connection getConnectionAndInitDatabase()
     {
         Connection c = null;
