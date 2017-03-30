@@ -22,6 +22,24 @@ public class Products
     private Date dataEndDiscount;
     private int discount;
 
+    public Products(int id, String location, String manufacture, int currentAmount, int minimalAmount, int catergoryCode, int buyPrice, int sellPrice)
+    {
+        this.id = id;
+        this.location = location;
+        this.manufacture = manufacture;
+        this.currentAmount = currentAmount;
+        /**/ amountInWarehouse = currentAmount;
+        /**/ amountInStore = 0;
+        /**/ defectAmount = 0;
+        this.catergoryCode = catergoryCode;
+
+        this.buyPrice = buyPrice;
+        this.sellPrice = sellPrice;
+        /**/ dateStartDiscount = null;
+        /**/ dataEndDiscount = null;
+        /**/ discount = 0;
+    }
+
     public String getLocation() {
         return location;
     }

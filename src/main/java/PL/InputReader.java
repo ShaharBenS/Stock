@@ -1,17 +1,12 @@
 package PL;
 
 import BL.ProductManagement;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
-
 import java.util.Scanner;
 
-/**
- * Created by Shahar on 29/03/17.
- */
+
 public class InputReader
 {
     private Scanner scanner = new Scanner(System.in);
-    private InputParser IP;
     private ProductManagement ProductM;
 
     private final String[] MENU = {"Choose an option:" ,
@@ -33,19 +28,16 @@ public class InputReader
                                     "14) Update product Category Code" ,
                                     "15) Update product Buy Price" ,
                                     "16) Update product Sell Price" ,
-                                    "17) Update product Discount (%)" ,
-                                    "18) Update product Date Start Discount" ,
-                                    "19) Update product Date End Discount" ,
                                     "** OTHER USEFUL OPERATIONS **",
-                                    "20) Add new Discount",
-                                    "21) Stock report by product ID",
-                                    "22) Stock report by category/ies",
-                                    "23) Defect products report",
-                                    "24) Show all products"};
+                                    "17) Add new Discount",
+                                    "18) Stock report by product ID",
+                                    "19) Stock report by category/ies",
+                                    "20) Defect products report",
+                                    "21) Show all products",
+                                    "22) Exit"};
 
-    public InputReader(InputParser ip, ProductManagement pm)
+    public InputReader(ProductManagement pm)
     {
-        this.IP = ip;
         this.ProductM = pm;
     }
 
@@ -53,7 +45,7 @@ public class InputReader
         This method starts reading input and passing it the InputParser.
         stops when user wishes to stop.
      */
-    void start()
+    public void start()
     {
         int operation;
 
@@ -66,13 +58,16 @@ public class InputReader
              try { operation = scanner.nextInt(); }
              catch(Exception r) { System.out.print("Invalid operation. Please try again\n\n"); continue; }
 
+             String prop;
              switch(operation)
              {
                  case 1:
                      System.out.print("Enter the Products properties (separated by 1 space!) in the following structure:\n" +
                              "[ID] [LOCATION] [MANUFACTURE] [CURRENT AMOUNT] [MINIMAL AMOUNT] [CATEGORY CODE] [BUY PRICE] [SELL PRICE]\n");
                      String productLine = scanner.nextLine();
-                     ProductM
+                     if(ProductM.addProduct(productLine))
+                         System.out.print(" >> Product added successfully\n");
+                     else System.out.print(" >> Invalid arguments. Try again\n");
                      break;
                  case 2:
                      break;
@@ -83,22 +78,58 @@ public class InputReader
                  case 5:
                      break;
                  case 6:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW ID]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductId(prop));
                      break;
                  case 7:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW LOCATION]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductLocation(prop));
                      break;
                  case 8:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW MANUFACTURE]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductManufacture(prop));
                      break;
                  case 9:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW CURRENT AMOUNT]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductCurrentAmount(prop));
                      break;
                  case 10:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW AMOUNT IN WAREHOUSE]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductAmountInWarehouse(prop));
                      break;
                  case 11:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW AMOUNT IN STORE]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductAmountInStore(prop));
                      break;
                  case 12:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW MINIMAL AMOUNT]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductMinimalAmount(prop));
                      break;
                  case 13:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW AMOUNT OF DEFECTS]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductDefectAmount(prop));
                      break;
                  case 14:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID] [NEW CATEGORY CODE]\n");
+                     prop = scanner.nextLine();
+                     printUpdate(ProductM.updateProductCategoryCode(prop));
                      break;
                  case 15:
                      break;
@@ -124,5 +155,11 @@ public class InputReader
              }
             //Read Input:
         }
+    }
+
+    private void printUpdate(boolean arg)
+    {
+        if(arg) System.out.print(" >> Product updated successfully\n");
+        else System.out.print(" >> Invalid arguments. Try again\n");
     }
 }

@@ -10,7 +10,7 @@ import java.sql.*;
 public class  Category_Data
 {
     Connection connection;
-    Category_Data(Connection c)
+    public Category_Data(Connection c)
     {
         connection = c;
     }

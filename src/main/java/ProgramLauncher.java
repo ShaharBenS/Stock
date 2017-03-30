@@ -3,7 +3,7 @@ import BL.PriceManagement;
 import BL.ProductManagement;
 import DAL.Category_Data;
 import DAL.Product_Data;
-import PL.InputParser;
+import PL.InputReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,7 +19,15 @@ public class ProgramLauncher
         //Initializing all layers. And DataBase
         Connection conn = getConnectionAndInitDatabase();
 
+        Category_Data categoryData = new Category_Data(conn);
+        Product_Data productData = new Product_Data(conn);
 
+        CategoryManagement categoryManagement = new CategoryManagement();
+        PriceManagement priceManagement = new PriceManagement();
+        ProductManagement productManagement = new ProductManagement(productData);
+
+        InputReader inputReader = new InputReader(productManagement);
+        inputReader.start();
 
         //Close
         try {
@@ -29,16 +37,7 @@ public class ProgramLauncher
         }
     }
 
-        CategoryManagement categoryManagement = new CategoryManagement();
-        PriceManagement priceManagement = new PriceManagement();
-        ProductManagement productManagement = new ProductManagement();
 
-
-        Category_Data categoryData = new Category_Data();
-        Product_Data productData = new Product_Data();
-
-        InputParser inputParser = new InputParser(categoryManagement, priceManagement, productManagement);
-    }
     private static Connection getConnectionAndInitDatabase()
     {
         Connection c = null;

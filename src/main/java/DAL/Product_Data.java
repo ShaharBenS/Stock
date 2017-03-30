@@ -12,7 +12,7 @@ public class Product_Data
 {
 
     Connection connection;
-    Product_Data(Connection c)
+    public Product_Data(Connection c)
     {
         connection = c;
     }
@@ -55,7 +55,9 @@ public class Product_Data
         {
             Statement state = connection.createStatement();
             ResultSet result = state.executeQuery(query1);
-            products = new Products();
+
+            //TODO:: just initialize the variables in the constractor here ↓↓↓↓ instead of setters!
+            ///*TODO:: look up ! ^^^ this is the line : */products = new Products();
 
             products.setId(result.getInt("ID"));
             products.setLocation(result.getString("LOCATION"));
@@ -84,45 +86,52 @@ public class Product_Data
         return products;
     }
 
-    public boolean updateProductId(int id)
+
+    public boolean updateProductId(int id, int newId)
     {
         return true;
     }
 
-    public boolean updateProductLocation(String location)
+    public boolean updateProductLocation(int id, String location)
     {
         return true;
     }
 
-    public boolean updateProductManufacture(String manufacture)
+    public boolean updateProductManufacture(int id, String manufacture)
     {
         return true;
     }
 
-    public boolean updateProductCurrentAmount(int amount)
+    public boolean updateProductCurrentAmount(int id, int amount)
     {
         return true;
     }
 
-    public boolean updateProductAmountInWarehouse(int amount)
+    public boolean updateProductAmountInWarehouse(int id, int amount)
     {
         return true;
     }
 
-    public boolean updateProductAmountInStore(int amount)
+    public boolean updateProductAmountInStore(int id, int amount)
     {
         return true;
     }
 
-    public boolean updateProductDefectAmount(int amount)
+    public boolean updateProductDefectAmount(int id, int amount)
     {
         return true;
     }
 
-    public boolean updateProductCategoryCode(int categoryCode)
+    public boolean updateProductCategoryCode(int id, int categoryCode)
     {
         return true;
     }
+
+    public boolean updateProductMinimalAmount(int id, int amount)
+    {
+        return true;
+    }
+
 
     /* DATA FOR PRICES */
 
