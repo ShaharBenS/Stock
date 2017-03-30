@@ -27,6 +27,7 @@ public class ProgramLauncher
         ProductManagement productManagement = new ProductManagement(productData);
 
         InputReader inputReader = new InputReader(productManagement,priceManagement,categoryManagement);
+        inputReader.start();
 
         //Close
         try {
@@ -74,7 +75,7 @@ public class ProgramLauncher
                     "(ID INT PRIMARY KEY NOT NULL," +
                     " PRICE_COST     INT    NOT NULL, " +
                     " PRICE_SELL     INT     NOT NULL, " +
-                    " DISCOUNT       INT CHECK(DISCOUNT >=0 AND DISCOUNT <=100), " +
+                    " DISCOUNT       INT CHECK(DISCOUNT >= 0 AND DISCOUNT <=100), " +
                     " DATE_START     DATE CHECK(DATE_START >= CURRENT_DATE) NOT NULL," +
                     " DATE_END       DATE CHECK(DATE_END > DATE_START) NOT NULL," +
                     " FOREIGN KEY(ID) REFERENCES  PRODUCTS(ID));";

@@ -3,8 +3,6 @@ package PL;
 import BL.CategoryManagement;
 import BL.PriceManagement;
 import BL.ProductManagement;
-
-import java.util.Locale;
 import java.util.Scanner;
 
 
@@ -46,7 +44,7 @@ public class InputReader
     }
 
     /*
-        This method starts reading input and passing it the InputParser.
+        This method starts reading input and
         stops when user wishes to stop.
      */
     public void start()
@@ -150,11 +148,7 @@ public class InputReader
                  case 21:
                      break;
                  case 22:
-                     break;
-                 case 23:
-                     break;
-                 case 24:
-                     break;
+                     return; // EXITING!
 
              }
             //Read Input:

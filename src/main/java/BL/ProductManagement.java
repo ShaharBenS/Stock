@@ -75,17 +75,6 @@ public class ProductManagement
         } catch(Exception e){ return  false; }
     }
 
-    public boolean updateProductCurrentAmount(String line)
-    {
-        String[] prop = line.split(" ");
-        if(prop.length != 2) return false;
-        try{
-            int num1 = Integer.parseInt(prop[0]);
-            int num2 = Integer.parseInt(prop[1]);
-            return PD.updateProductCurrentAmount(num1, num2);
-        } catch(Exception e){ return  false; }
-    }
-
     public boolean updateProductAmountInWarehouse(String line)
     {
         String[] prop = line.split(" ");

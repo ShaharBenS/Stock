@@ -20,27 +20,27 @@ import java.util.Date;
 
     /* DATA FOR PRICES */
 
-    public boolean updateBuyPrice(int price)
+    public boolean updateBuyPrice(int id,int price)
     {
         return true;
     }
 
-    public boolean updateSellPrice(int price)
+    public boolean updateSellPrice(int id,int price)
     {
         return true;
     }
 
-    public boolean updateStartDate(Date start)
+    public boolean updateStartDate(int id,Date start)
     {
         return true;
     }
 
-    public boolean updateEndDate(Date end)
+    public boolean updateEndDate(int id,Date end)
     {
         return true;
     }
 
-    public boolean updateProductDiscount(int discount)
+    public boolean updateProductDiscount(int id,int discount)
     {
         return true;
     }

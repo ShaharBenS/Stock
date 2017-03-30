@@ -86,77 +86,116 @@ public class Product_Data
         return products;
     }
 
+    /*
+     * This method gets the name of the column the id of the products and the new value.
+     */
+    private boolean updateColumnInProduct(String columnName, int id, Object newValue)
+    {
+        String query = "UPDATE PRODUCT SET ? = ? WHERE ID = ?";
+        try {
+            PreparedStatement _ps = connection.prepareStatement(query);
+            _ps.setString(1, columnName);
+            _ps.setObject(2, newValue);
+            _ps.setInt(3, id);
+            _ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     public boolean updateProductId(int id, int newId)
     {
-        return true;
+        return updateColumnInProduct("ID",id,newId);
     }
 
     public boolean updateProductLocation(int id, String location)
     {
-        return true;
+        return updateColumnInProduct("LOCATION",id,location);
     }
 
     public boolean updateProductManufacture(int id, String manufacture)
     {
-        return true;
-    }
-
-    public boolean updateProductCurrentAmount(int id, int amount)
-    {
-        return true;
+        return updateColumnInProduct("MANUFACTURE",id,manufacture);
     }
 
     public boolean updateProductAmountInWarehouse(int id, int amount)
     {
-        return true;
+        return updateColumnInProduct("AMOUNT_STORAGE",id,amount);
     }
 
     public boolean updateProductAmountInStore(int id, int amount)
     {
-        return true;
+        return updateColumnInProduct("AMOUNT_STORE",id,amount);
     }
 
     public boolean updateProductDefectAmount(int id, int amount)
     {
-        return true;
+        return updateColumnInProduct("AMOUNT_DEFECT",id,amount);
     }
 
     public boolean updateProductCategoryCode(int id, int categoryCode)
     {
-        return true;
+        return updateColumnInProduct("CATEGORY_CODE",id,categoryCode);
     }
 
     public boolean updateProductMinimalAmount(int id, int amount)
     {
-        return true;
+        return updateColumnInProduct("MINIMAL_AMOUNT",id,amount);
+    }
+
+    /*
+     * This method gets the name of the column the id of the products_price and the new value.
+     */
+    private boolean updateColumnInProductPrice(String columnName, int id, Object newValue)
+    {
+        String query = "UPDATE PRODUCTS_PRICE SET ? = ? WHERE ID = ?";
+        try {
+            PreparedStatement _ps = connection.prepareStatement(query);
+            _ps.setString(1, columnName);
+            _ps.setObject(2, newValue);
+            _ps.setInt(3, id);
+            _ps.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e)
+        {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
     /* DATA FOR PRICES */
 
-    public boolean updateBuyPrice(int price)
+    public boolean updateBuyPrice(int id,int price)
     {
-        return true;
+        return updateColumnInProductPrice("PRICE_COST",id,price);
     }
 
-    public boolean updateSellPrice(int price)
+    public boolean updateSellPrice(int id,int price)
     {
-        return true;
+        return updateColumnInProductPrice("PRICE_SELL",id,price);
     }
 
-    public boolean updateStartDate(Date start)
+    public boolean updateStartDate(int id,Date start)
     {
-        return true;
+        return updateColumnInProductPrice("DATE_START",id,start);
     }
 
-    public boolean updateEndDate(Date end)
+    public boolean updateEndDate(int id,Date end)
     {
-        return true;
+        return updateColumnInProductPrice("DATE_END",id,end);
     }
 
-    public boolean updateProductDiscount(int discount)
+    public boolean updateProductDiscount(int id,int discount)
     {
-        return true;
+        return updateColumnInProductPrice("DISCOUNT",id,discount);
     }
 }

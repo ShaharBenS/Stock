@@ -32,4 +32,8 @@ public class Date
         System.out.println("This method should be implemented! Class:Date, Line:32");
     }
 
+    @Override public String toString()
+    {
+        return day+"/"+month+"/"+year;
+    }
 }
