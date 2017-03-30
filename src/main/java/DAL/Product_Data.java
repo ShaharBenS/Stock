@@ -1,9 +1,9 @@
 package DAL;
 
 import SharedClasses.Products;
+import SharedClasses.Date;
 
 import java.sql.*;
-import java.util.Date;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -201,7 +201,7 @@ public class Product_Data
         return updateColumnInProductPrice("PRICE_SELL",id,price);
     }
 
-    public boolean updateStartDate(int id,Date start)
+    public boolean updateStartDate(int id, Date start)
     {
         return updateColumnInProductPrice("DATE_START",id,start);
     }

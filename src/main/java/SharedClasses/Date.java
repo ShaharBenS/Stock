@@ -36,4 +36,8 @@ public class Date
     {
         return day+"/"+month+"/"+year;
     }
+    public boolean equals(Date date)
+    {
+        return year == date.year && month == date.month && this.day == date.day;
+    }
 }

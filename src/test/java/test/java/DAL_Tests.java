@@ -59,8 +59,16 @@ public class DAL_Tests
      */
     @Test public void products_testInsertion()
     {
-        Products p1 = new Products(0,"0","0",10,2,0,2,5);
-        PD.addProduct(p1);
+        Products p1 = new Products(0,"LOCATION-0","MANUFACTURE-0",
+                5,10,2,0,5,10);
+
+
+        if(!PD.addProduct(p1))
+        {
+            fail("Failed adding producs");
+        }
+
+        assertEquals(PD.getProduct(0).equals(p1),true);
 
 
     }

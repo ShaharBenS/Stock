@@ -19,7 +19,7 @@ public class ProductManagement
     {
         String[] pParts = pLine.split(" ");
         if(pParts.length != 8) return false;
-        Products p;
+        Products p = null;
         try
         {
             /*0*/ int id = Integer.parseInt(pParts[0]);
@@ -32,7 +32,8 @@ public class ProductManagement
             /*7*/ int sell = Integer.parseInt(pParts[7]);
             if(pParts[5].length() != 3) return false;
 
-            p = new Products(id, pParts[1], pParts[2], amount, minimal, cCode, buy, sell);
+            //FIX THIS SHIT **NO TOTAL AMOUNT** REMEMBER
+            //p = new Products(id, pParts[1], pParts[2], amount, minimal, cCode, buy, sell);
 
         } catch (Exception e) { return false; }
         return PD.addProduct(p);

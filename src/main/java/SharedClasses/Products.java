@@ -1,6 +1,8 @@
 package SharedClasses;
 
 
+import DAL.Product_Data;
+
 /**
  * Created by Shahar on 29/03/17.
  */
@@ -22,22 +24,36 @@ public class Products
     private Date dataEndDiscount;
     private int discount;
 
-    public Products(int id, String location, String manufacture, int currentAmount, int minimalAmount, int catergoryCode, int buyPrice, int sellPrice)
+    public Products(int id, String location, String manufacture, int amountInStore,int amountInStorage, int minimalAmount, int catergoryCode, int buyPrice, int sellPrice)
     {
         this.id = id;
         this.location = location;
         this.manufacture = manufacture;
-        this.currentAmount = currentAmount;
-        /**/ amountInWarehouse = currentAmount;
-        /**/ amountInStore = 0;
+        this.amountInWarehouse = amountInStorage;
+        this.amountInStore = amountInStore;
+        this.currentAmount = amountInStorage + amountInStore;
         /**/ defectAmount = 0;
         this.catergoryCode = catergoryCode;
+        this.minimalAmount = minimalAmount;
 
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
         /**/ dateStartDiscount = null;
         /**/ dataEndDiscount = null;
         /**/ discount = 0;
+    }
+
+    public boolean equals(Products products)
+    {
+        return  this.id == products.id &&
+                this.location.equals(products.location) &&
+                this.manufacture.equals(products.manufacture) &&
+                this.currentAmount == products.currentAmount && this.amountInStore == products.amountInStore &&
+                this.amountInWarehouse == products.amountInWarehouse && this.minimalAmount == products.minimalAmount &&
+                this.defectAmount == products.defectAmount && this.catergoryCode == products.catergoryCode &&
+                this.buyPrice == products.buyPrice && this.sellPrice == products.sellPrice &&
+                this.dateStartDiscount.equals(products.dateStartDiscount) && this.dataEndDiscount.equals(products.dataEndDiscount)
+                && this.discount == products.discount;
     }
 
     public String getLocation() {
