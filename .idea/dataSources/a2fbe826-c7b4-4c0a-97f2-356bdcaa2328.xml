@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="identifier.sqlite">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <table id="3" parent="2" name="CATEGORY"/>
+    <table id="4" parent="2" name="PRODUCTS"/>
+    <column id="5" parent="3" name="ID">
+      <DataType>INT(0,-1)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="6" parent="3" name="NAME">
+      <Position>1</Position>
+      <DataType>TEXT(0,-1)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="7" parent="3" name="ID_FATHER">
+      <Position>2</Position>
+      <DataType>INT(0,-1)|4</DataType>
+    </column>
+    <index id="8" parent="3" name="sqlite_autoindex_CATEGORY_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="9" parent="3">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="10" parent="3" name="#FAKE_CATEGORY_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID_FATHER</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefTableName>CATEGORY</RefTableName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
+    </foreign-key>
+    <column id="11" parent="4" name="ID">
+      <DataType>INT(0,-1)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="12" parent="4" name="LOCATION">
+      <Position>1</Position>
+      <DataType>TEXT(0,-1)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="13" parent="4" name="MANUFACTURE">
+      <Position>2</Position>
+      <DataType>TEXT(0,-1)|12</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="14" parent="4" name="AMOUNT_STORE">
+      <Position>3</Position>
+      <DataType>INT(0,-1)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="15" parent="4" name="AMOUNT_STORAGE">
+      <Position>4</Position>
+      <DataType>INT(0,-1)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="16" parent="4" name="AMOUNT_DEFECT">
+      <Position>5</Position>
+      <DataType>INT(0,-1)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="4" name="MINIMAL_AMOUNT">
+      <Position>6</Position>
+      <DataType>INT(0,-1)|4</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="4" name="CATEGORY_CODE">
+      <Position>7</Position>
+      <DataType>INT(0,-1)|4</DataType>
+    </column>
+    <index id="19" parent="4" name="sqlite_autoindex_PRODUCTS_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="20" parent="4">
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="21" parent="4" name="#FAKE_PRODUCTS_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CATEGORY_CODE</ColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+      <RefTableName>CATEGORY</RefTableName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>no-action</OnDelete>
+      <OnUpdate>no-action</OnUpdate>
+    </foreign-key>
+  </database-model>
+</dataSource>

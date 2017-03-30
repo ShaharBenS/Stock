@@ -2,6 +2,7 @@ package DAL;
 
 import SharedClasses.Products;
 
+import java.sql.Connection;
 import java.util.Date;
 
 /**
@@ -9,6 +10,12 @@ import java.util.Date;
  */
 public class Product_Data
 {
+
+    Connection connection;
+    Product_Data(Connection c)
+    {
+        connection = c;
+    }
 
     /* DATE FOR REGULAR PROPERTIES */
 

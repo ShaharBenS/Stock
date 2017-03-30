@@ -2,17 +2,17 @@ package DAL;
 
 import SharedClasses.Category;
 
+import java.sql.Connection;
+
 /**
  * Created by Shahar on 29/03/17.
  */
 public class  Category_Data
 {
-    /*
-        The constructor gets the SQL connection here
-     */
-    Category_Data()
+    Connection connection;
+    Category_Data(Connection c)
     {
-
+        connection = c;
     }
 
     public boolean addCategory(Category c)
