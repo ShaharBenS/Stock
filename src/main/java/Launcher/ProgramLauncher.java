@@ -59,14 +59,13 @@ public class ProgramLauncher
             String sql = "CREATE TABLE IF NOT EXISTS CATEGORY " +
                         "(ID INT PRIMARY KEY     NOT NULL ," +
                         " NAME           CHAR(50) NOT NULL, " +
-                        " ID_FATHER      INT   ," +
-                        " FOREIGN KEY(ID_FATHER) REFERENCES CATEGORY(ID) ON UPDATE CASCADE ON DELETE CASCADE);";
+                        " ID_FATHER  INT DEFAULT NULL REFERENCES CATEGORY(ID) ON UPDATE CASCADE ON DELETE SET NULL);";
             stmt.executeUpdate(sql);
 
             stmt.close();
 
             stmt = c.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS PRODUCTS " +
+            sql =   "CREATE TABLE IF NOT EXISTS PRODUCTS " +
                     "(ID INT PRIMARY KEY     NOT NULL," +
                     " LOCATION       CHAR(50)  NOT NULL, " +
                     " MANUFACTURE    CHAR(50)  NOT NULL, " +
@@ -80,7 +79,7 @@ public class ProgramLauncher
             stmt.close();
 
             stmt = c.createStatement();
-            sql = "CREATE TABLE IF NOT EXISTS PRODUCTS_PRICE " +
+            sql =   "CREATE TABLE IF NOT EXISTS PRODUCTS_PRICE " +
                     "(ID INT PRIMARY KEY NOT NULL," +
                     " PRICE_COST     INT    NOT NULL, " +
                     " PRICE_SELL     INT     NOT NULL, " +

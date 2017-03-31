@@ -4,6 +4,7 @@ import SharedClasses.Category;
 import SharedClasses.Products;
 
 import java.sql.*;
+import java.util.SimpleTimeZone;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -24,7 +25,9 @@ public class  Category_Data
             PreparedStatement _ps = connection.prepareStatement(query);
             _ps.setInt(1, c.getId());
             _ps.setString(2, c.getName());
-            _ps.setString(3, c.getIdFather() == -1 ? "NULL" : ""+c.getIdFather());
+            if(c.getIdFather()!=-1)
+                _ps.setInt(3, c.getIdFather());
+
             _ps.executeUpdate();
             return true;
 
@@ -66,7 +69,7 @@ public class  Category_Data
             int catID = result.getInt("ID");
             String catName = result.getString("NAME");
             category = new Category(catID, catName);
-            category.setIdFather(result.getString("ID_FATHER").equals("NULL")
+            category.setIdFather(result.getString("ID_FATHER") == null
             ? -1 : result.getInt("ID_FATHER"));
 
         } catch (SQLException e) {
