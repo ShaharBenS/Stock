@@ -52,8 +52,7 @@ public class ProgramLauncher
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:"+dataBaseName);
 
-            c.createStatement().execute("PRAGMA FOREIGN_KEYS = ON;" +
-                    "PRAGMA FOREIGN_KEYS;");
+            c.createStatement().execute("PRAGMA FOREIGN_KEYS = ON;");
 
             /*Creating Tables if they are NOT existed */
             stmt = c.createStatement();
@@ -61,8 +60,9 @@ public class ProgramLauncher
                         "(ID INT PRIMARY KEY     NOT NULL ," +
                         " NAME           CHAR(50) NOT NULL, " +
                         " ID_FATHER      INT   ," +
-                        " FOREIGN KEY(ID_FATHER) REFERENCES CATEGORY(ID));";
+                        " FOREIGN KEY(ID_FATHER) REFERENCES CATEGORY(ID) ON UPDATE CASCADE ON DELETE CASCADE);";
             stmt.executeUpdate(sql);
+
             stmt.close();
 
             stmt = c.createStatement();
@@ -75,7 +75,7 @@ public class ProgramLauncher
                     " AMOUNT_DEFECT  INT     NOT NULL," +
                     " MINIMAL_AMOUNT INT     NOT NULL," +
                     " CATEGORY_CODE  INT      ," +
-                    " FOREIGN KEY(CATEGORY_CODE) REFERENCES CATEGORY(ID));";
+                    " FOREIGN KEY(CATEGORY_CODE) REFERENCES CATEGORY(ID) ON UPDATE CASCADE ON DELETE SET NULL);";
             stmt.executeUpdate(sql);
             stmt.close();
 
@@ -87,7 +87,7 @@ public class ProgramLauncher
                     " DISCOUNT       INT CHECK(DISCOUNT >= 0 AND DISCOUNT <=100), " +
                     " DATE_START     DATE," +
                     " DATE_END       DATE," +
-                    " FOREIGN KEY(ID) REFERENCES  PRODUCTS(ID));";
+                    " FOREIGN KEY(ID) REFERENCES  PRODUCTS(ID) ON UPDATE CASCADE ON DELETE CASCADE );";
             stmt.executeUpdate(sql);
             stmt.close();
 
