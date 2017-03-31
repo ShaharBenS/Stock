@@ -1,6 +1,7 @@
 package BL;
 
 import DAL.Category_Data;
+import DAL.Product_Data;
 import SharedClasses.Category;
 import SharedClasses.Products;
 
@@ -11,9 +12,11 @@ import SharedClasses.Products;
 public class CategoryManagement
 {
     private Category_Data _CD;
-    public CategoryManagement(Category_Data cd)
+    private Product_Data PD;
+    public CategoryManagement(Category_Data cd, Product_Data pd)
     {
         _CD = cd;
+        this.PD = pd;
     }
 
     public boolean addCategory(String line)
@@ -90,7 +93,7 @@ public class CategoryManagement
             if(cats[i].length() != 3) return new String[] {"1 or more INVALID ID"};
             cArr[i] = _CD.getCategory(id);
         }
-        Products[] products = _CD.getAllProductsbyCat(cArr);
+        Products[] products = PD.getAllProductsbyCat(cArr);
         String[] plist = new String[products.length];
         for(int i=0; i<plist.length; i++)
             plist[i] = products[i].toString();

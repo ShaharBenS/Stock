@@ -27,7 +27,7 @@ public class ProgramLauncher
         Product_Data productData = new Product_Data(conn);
 
         //BL
-        CategoryManagement categoryManagement = new CategoryManagement(categoryData);
+        CategoryManagement categoryManagement = new CategoryManagement(categoryData, productData);
         PriceManagement priceManagement = new PriceManagement(productData);
         ProductManagement productManagement = new ProductManagement(productData);
 
