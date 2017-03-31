@@ -62,20 +62,21 @@ public class  Category_Data
         {
             Statement state = connection.createStatement();
             ResultSet result = state.executeQuery(query);
-            category = new Category();
 
-            category.setId(result.getInt("ID"));
-            category.setName(result.getString("NAME"));
+            int catID = result.getInt("ID");
+            String catName = result.getString("NAME");
+            category = new Category(catID, catName);
             category.setIdFather(result.getString("ID_FATHER").equals("NULL")
             ? -1 : result.getInt("ID_FATHER"));
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            return category;
         }
         return category;
     }
     public boolean updateCategoryId(int id,int newID)
     {
+        if(getCategory(id) == null) return false;
         String query = "UPDATE CATEGORY SET ID = ? WHERE ID = ?";
         try {
             PreparedStatement _ps = connection.prepareStatement(query);
@@ -87,7 +88,6 @@ public class  Category_Data
 
         } catch (SQLException e)
         {
-            e.printStackTrace();
             return false;
         }
     }

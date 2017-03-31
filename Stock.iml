@@ -17,10 +17,12 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.16.1.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.8.11.2.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.8.11.2.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>

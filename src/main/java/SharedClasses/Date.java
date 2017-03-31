@@ -29,15 +29,17 @@ public class Date
     }
     public Date(String date)
     {
-        String [] strings = date.split("\\.");
-        day = Byte.parseByte(strings[0]);
-        month = Byte.parseByte(strings[1]);
-        year = Short.parseShort(strings[2]);
+        try {
+            String[] parts = date.split("\\.");
+            this.day = Byte.parseByte(parts[0]);
+            this.month = Byte.parseByte(parts[1]);
+            this.year = Short.parseShort(parts[2]);
+        }catch(Exception e){this.day = 0; this.month = 0; this.year =0;}
     }
 
     @Override public String toString()
     {
-        return day+"."+month+"."+year;
+        return ""+day+"."+month+"."+year;
     }
     public boolean equals(Date date)
     {

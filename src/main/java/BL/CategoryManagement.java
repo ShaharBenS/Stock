@@ -31,7 +31,7 @@ public class CategoryManagement
             /*1*/ /* << NOTHING TO CHECK << */
             int idF = -1;
             if(cParts.length == 3) {
-                if (cParts[0].length() != 3) return false;
+                if (cParts[2].length() != 3) return false;
                 else idF = Integer.parseInt(cParts[2]);
             }
 
@@ -77,7 +77,7 @@ public class CategoryManagement
             if(prop[0].length() != 3 || prop[1].length() != 3) return false;
             int id = Integer.parseInt(prop[0]);
             int nid = Integer.parseInt(prop[1]);
-            return _CD.updateCategoryId(id, nid);
+            return _CD.updateCategoryIdFather(id, nid);
         } catch(Exception e){ return  false; }
     }
 
