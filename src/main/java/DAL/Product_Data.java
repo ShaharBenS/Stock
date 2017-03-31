@@ -175,7 +175,7 @@ public class Product_Data
     {
         String query = "SELECT * " +
                         "FROM PRODUCTS_PRICE CROSS JOIN PRODUCTS " +
-                        "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID;";
+                        "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID AND PRODUCTS.ID = "+id+";";
         Products products = null;
         try
         {
@@ -196,13 +196,10 @@ public class Product_Data
      */
     private boolean updateColumnInProduct(String columnName, int id, Object newValue)
     {
-        String query = "UPDATE PRODUCT SET ? = ? WHERE ID = ?";
+        String query = "UPDATE PRODUCTS SET "+columnName+" = '"+newValue+"' WHERE ID = "+id+";";
         try {
-            PreparedStatement _ps = connection.prepareStatement(query);
-            _ps.setString(1, columnName);
-            _ps.setObject(2, newValue);
-            _ps.setInt(3, id);
-            _ps.executeUpdate();
+            Statement _ps = connection.createStatement();
+            _ps.executeUpdate(query);
 
             return true;
 
@@ -260,14 +257,10 @@ public class Product_Data
      */
     private boolean updateColumnInProductPrice(String columnName, int id, Object newValue)
     {
-        String query = "UPDATE PRODUCTS_PRICE SET ? = ? WHERE ID = ?";
+        String query = "UPDATE PRODUCTS_PRICE SET "+columnName+" = "+newValue+" WHERE ID = "+id+";";
         try {
-            PreparedStatement _ps = connection.prepareStatement(query);
-            _ps.setString(1, columnName);
-            _ps.setObject(2, newValue);
-            _ps.setInt(3, id);
-            _ps.executeUpdate();
-
+            Statement _ps = connection.createStatement();
+            _ps.executeUpdate(query);
             return true;
 
         } catch (SQLException e)

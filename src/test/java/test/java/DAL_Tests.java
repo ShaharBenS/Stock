@@ -98,14 +98,16 @@ public class DAL_Tests
         p1.setDefectAmount(2);
         p1.setAmountInStore(p1.getAmountInStore()-p1.getDefectAmount());
         p1.setCurrentAmount(p1.getAmountInWarehouse()+p1.getAmountInStore()+p1.getDefectAmount());
+        PD.addProduct(p1);
 
         Products p2 = new Products(1,"LOCATION-1","MANUFACTURE-1",
                 3,5,2,0,2,10);
         p2.setDefectAmount(2);
         p2.setAmountInStore(p2.getAmountInStore()-p2.getDefectAmount());
         p2.setCurrentAmount(p2.getAmountInWarehouse()+p2.getAmountInStore()+p2.getDefectAmount());
+        PD.addProduct(p2);
 
-        p1.setBuyPrice(5);
+        p1.setBuyPrice(2);
         PD.updateBuyPrice(0,2);
 
         p2.setLocation("LOCATION-2");
