@@ -4,6 +4,8 @@ import SharedClasses.Products;
 import SharedClasses.Date;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -37,7 +39,7 @@ public class Product_Data
             _ps.setInt(5, p.getAmountInWarehouse());
             _ps.setInt(6, p.getDefectAmount());
             _ps.setInt(7, p.getMinimalAmount());
-            _ps.setInt(8, p.getCatergoryCode());
+            _ps.setInt(8, p.getCategoryCode());
 
             _ps.executeUpdate();
 
@@ -65,10 +67,62 @@ public class Product_Data
     public Products[] getAllDefectProducts()
     {
         Products[] products = null; //TODO: <<< fix this <<<
-        String query1 = "SELECT * FROM PRODUCTS WHERE AMOUNT_DEFECT > 0 ";
-        //TODO: return array of products with defect amount
+        List<Products> productsList = new ArrayList<Products>();
+        String query =  "SELECT * " +
+                        "FROM PRODUCTS CROSS JOIN PRODUCTS_PRICE " +
+                        "WHERE AMOUNT_DEFECT > 0 AND PRODUCTS.ID = PRODUCTS_PRICE.ID";
 
-        return products;
+        try
+        {
+
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+
+            int index = 0;
+            while(result.next())
+            {
+                productsList.add(buildProductFromResultSet(result));
+                index++;
+            }
+            products = new Products[index];
+            return productsList.toArray(products);
+
+        } catch (SQLException e)
+        {
+            return null;
+        }
+    }
+
+    /*
+        This method gets a result Set and build a products Object which will then be returned
+     */
+    private Products buildProductFromResultSet(ResultSet result)
+    {
+        Products p = new Products();
+
+        try {
+            p.setId(result.getInt("ID"));
+            p.setLocation(result.getString("LOCATION"));
+            p.setManufacture(result.getString("MANUFACTURE"));
+            p.setAmountInStore(result.getInt("AMOUNT_STORE"));
+            p.setAmountInWarehouse(result.getInt("AMOUNT_STORAGE"));
+            p.setDefectAmount(result.getInt("AMOUNT_DEFECT"));
+            p.setMinimalAmount(result.getInt("MINIMAL_AMOUNT"));
+            p.setCategoryCode(result.getInt("CATEGORY_CODE"));
+            p.setCurrentAmount(p.getDefectAmount() + p.getAmountInStore() + p.getAmountInWarehouse());
+
+            p.setBuyPrice(result.getInt("PRICE_COST"));
+            p.setSellPrice(result.getInt("PRICE_SELL"));
+            p.setDiscount(result.getInt("DISCOUNT"));
+            p.setDateStartDiscount(result.getString("DATE_START"));
+            p.setDateEndDiscount(result.getString("DATE_END"));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return p;
     }
 
     public Products[] getAllProducts()
@@ -80,42 +134,25 @@ public class Product_Data
         return products;
     }
 
+    public boolean updateCategoryDiscount(int id,int discount)
+    {
+        //TODO:: its the most complicated thing cuz we need to update discount to all the products in the sub-category of this one's id..
+        return false;
+    }
+
     //RETURN PRODUCT FROM DATABASE IF EXISTS, ELSE RETURN NULL
     public Products getProduct(int id)
     {
-        String query1 = "SELECT * FROM PRODUCTS WHERE ID = "+id+";";
-        String query2 = "SELECT * " +
+        String query = "SELECT * " +
                         "FROM PRODUCTS_PRICE CROSS JOIN PRODUCTS " +
                         "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID;";
         Products products = null;
         try
         {
             Statement state = connection.createStatement();
-            ResultSet result = state.executeQuery(query1);
+            ResultSet result = state.executeQuery(query);
 
-            //TODO:: just initialize the variables in the constractor here ↓↓↓↓ instead of setters!
-            products = new Products();
-
-            products.setId(result.getInt("ID"));
-            products.setLocation(result.getString("LOCATION"));
-            products.setManufacture(result.getString("MANUFACTURE"));
-            products.setAmountInStore(result.getInt("AMOUNT_STORE"));
-            products.setAmountInWarehouse(result.getInt("AMOUNT_STORAGE"));
-            products.setDefectAmount(result.getInt("AMOUNT_DEFECT"));
-            products.setMinimalAmount(result.getInt("MINIMAL_AMOUNT"));
-            products.setCatergoryCode(result.getInt("CATEGORY_CODE"));
-            products.setCurrentAmount(products.getDefectAmount()+products.getAmountInStore()+products.getAmountInWarehouse());
-
-            state = connection.createStatement();
-            result = state.executeQuery(query2);
-
-            products.setBuyPrice(result.getInt("PRICE_COST"));
-            products.setSellPrice(result.getInt("PRICE_SELL"));
-            products.setDiscount(result.getInt("DISCOUNT"));
-            products.setDateStartDiscount(result.getString("DATE_START"));
-            products.setDateEndDiscount(result.getString("DATE_END"));
-
-
+            products = buildProductFromResultSet(result);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -236,11 +273,5 @@ public class Product_Data
     public boolean updateProductDiscount(int id,int discount)
     {
         return updateColumnInProductPrice("DISCOUNT",id,discount);
-    }
-
-    public boolean updateCategoryDiscount(int id,int discount)
-    {
-        //TODO:: its the most complicated thing cuz we need to update discount to all the products in the sub-category of this one's id..
-        return false;
     }
 }

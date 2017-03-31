@@ -14,7 +14,7 @@ public class Products
     private int amountInStore;
     private int minimalAmount;
     private int defectAmount;
-    private int catergoryCode;
+    private int categoryCode;
 
     private int buyPrice;
     private int sellPrice;
@@ -22,7 +22,7 @@ public class Products
     private Date dateEndDiscount;
     private int discount;
 
-    public Products(int id, String location, String manufacture, int amountInStore,int amountInWarehouse, int minimalAmount, int catergoryCode, int buyPrice, int sellPrice)
+    public Products(int id, String location, String manufacture, int amountInStore,int amountInWarehouse, int minimalAmount, int categoryCode, int buyPrice, int sellPrice)
     {
         this.id = id;
         this.location = location;
@@ -31,7 +31,7 @@ public class Products
         this.amountInStore = amountInStore;
         this.currentAmount = amountInWarehouse + amountInStore;
         /**/ defectAmount = 0;
-        this.catergoryCode = catergoryCode;
+        this.categoryCode = categoryCode;
         this.minimalAmount = minimalAmount;
 
         this.buyPrice = buyPrice;
@@ -51,18 +51,19 @@ public class Products
 
     public boolean equals(Products products)
     {
-        return  this.id == products.id &&
+        boolean condition1 = this.id == products.id &&
                 this.location.equals(products.location) &&
                 this.manufacture.equals(products.manufacture) &&
                 this.currentAmount == products.currentAmount && this.amountInStore == products.amountInStore &&
                 this.amountInWarehouse == products.amountInWarehouse && this.minimalAmount == products.minimalAmount &&
-                this.defectAmount == products.defectAmount && this.catergoryCode == products.catergoryCode &&
-                this.buyPrice == products.buyPrice && this.sellPrice == products.sellPrice &&
-                this.dateStartDiscount == null ? this.dateStartDiscount == products.dateStartDiscount :
-                this.dateStartDiscount.equals(products.dateStartDiscount) &&
-                this.dateStartDiscount == null ? this.dateStartDiscount == products.dateStartDiscount :
-                this.dateEndDiscount.equals(products.dateEndDiscount)
+                this.defectAmount == products.defectAmount && this.categoryCode == products.categoryCode &&
+                this.buyPrice == products.buyPrice && this.sellPrice == products.sellPrice
                 && this.discount == products.discount;
+        boolean condition2 =((this.dateStartDiscount == null) ? null == products.dateStartDiscount :
+                this.dateStartDiscount.equals(products.dateStartDiscount)) &&
+                ((this.dateStartDiscount == null) ? this.dateStartDiscount == products.dateStartDiscount :
+                        this.dateEndDiscount.equals(products.dateEndDiscount));
+        return condition1 && condition2;
     }
 
     public String getLocation() {
@@ -121,12 +122,12 @@ public class Products
         this.defectAmount = defectAmount;
     }
 
-    public int getCatergoryCode() {
-        return catergoryCode;
+    public int getCategoryCode() {
+        return categoryCode;
     }
 
-    public void setCatergoryCode(int catergoryCode) {
-        this.catergoryCode = catergoryCode;
+    public void setCategoryCode(int categoryCode) {
+        this.categoryCode = categoryCode;
     }
 
     public int getBuyPrice() {
@@ -199,7 +200,7 @@ public class Products
         s+="Amount in Store: "+ amountInStore+"\n";
         s+="Amount in Warehouse: "+ amountInWarehouse+"\n";
         s+="Defect Amount: "+ defectAmount+"\n";
-        s+="Category Code: "+ catergoryCode+"\n";
+        s+="Category Code: "+ categoryCode +"\n";
         s+="Buy Price: "+ buyPrice+"\n";
         s+="Sell Price: "+ sellPrice+"\n";
         s+="Discount: " + discount +"%\n";

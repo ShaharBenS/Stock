@@ -48,7 +48,15 @@ public class DAL_Tests
     }
     @Test public void category_testUpdate()
     {
+        Category c1 = new Category(0, "CATEGORY_0");
+        CD.addCategory(c1);
+        c1.setName("CATEGORY_NEW_0");
 
+        if(!CD.updateCategoryName(0,"CATEGORY_NEW_0"))
+        {
+            fail("Failed updating name");
+        }
+        assertEquals(CD.getCategory(0).equals(c1),true);
     }
 
 
@@ -85,6 +93,31 @@ public class DAL_Tests
 
     }
 
+    @Test public void test_getAllDefectProducts()
+    {
+        Category c1 = new Category(0, "CATEGORY_0");
+        CD.addCategory(c1);
+
+        Products p1 = new Products(0,"LOCATION-0","MANUFACTURE-0",
+                5,10,2,0,5,10);
+        p1.setDefectAmount(2);
+        p1.setAmountInStore(p1.getAmountInStore()-p1.getDefectAmount());
+        p1.setCurrentAmount(p1.getAmountInWarehouse()+p1.getAmountInStore()+p1.getDefectAmount());
+
+        Products p2 = new Products(1,"LOCATION-1","MANUFACTURE-1",
+                3,5,2,0,2,10);
+        p2.setDefectAmount(2);
+        p2.setAmountInStore(p2.getAmountInStore()-p2.getDefectAmount());
+        p2.setCurrentAmount(p2.getAmountInWarehouse()+p2.getAmountInStore()+p2.getDefectAmount());
+
+        PD.addProduct(p1);
+        PD.addProduct(p2);
+
+        Products [] products = PD.getAllDefectProducts();
+        assertEquals(products[0].equals(p1),true);
+        assertEquals(products[1].equals(p2),true);
+
+    }
 
     @After public void  tearDown() throws SQLException {
         connection.close();
