@@ -257,7 +257,7 @@ public class Product_Data
      */
     private boolean updateColumnInProductPrice(String columnName, int id, Object newValue)
     {
-        String query = "UPDATE PRODUCTS_PRICE SET "+columnName+" = "+newValue+" WHERE ID = "+id+";";
+        String query = "UPDATE PRODUCTS_PRICE SET "+columnName+" = '"+newValue+"' WHERE ID = "+id+";";
         try {
             Statement _ps = connection.createStatement();
             _ps.executeUpdate(query);
