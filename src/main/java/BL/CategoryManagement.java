@@ -2,6 +2,7 @@ package BL;
 
 import DAL.Category_Data;
 import SharedClasses.Category;
+import SharedClasses.Products;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -75,6 +76,25 @@ public class CategoryManagement
             int nid = Integer.parseInt(prop[1]);
             return _CD.updateCategoryId(id, nid);
         } catch(Exception e){ return  false; }
+    }
+
+    public String[] productReportbyCategory(String line)
+    {
+        String[] cats = line.split(" ");
+        Category[] cArr = new Category[cats.length];
+        for(int i=0; i<cArr.length; i++)
+        {
+            int id = 0;
+            try{ id = Integer.parseInt(cats[i]);}
+            catch (Exception e){ return new String[] {"1 or more INVALID ID"};}
+            if(cats[i].length() != 3) return new String[] {"1 or more INVALID ID"};
+            cArr[i] = _CD.getCategory(id);
+        }
+        Products[] products = _CD.getAllProductsbyCat(cArr);
+        String[] plist = new String[products.length];
+        for(int i=0; i<plist.length; i++)
+            plist[i] = products[i].toString();
+        return plist;
     }
 
 }

@@ -21,13 +21,17 @@ public class ProgramLauncher
         //Initializing all layers. And DataBase
         Connection conn = getConnectionAndInitDatabase("stock.db");
 
+
+        //DAL
         Category_Data categoryData = new Category_Data(conn);
         Product_Data productData = new Product_Data(conn);
 
+        //BL
         CategoryManagement categoryManagement = new CategoryManagement(categoryData);
         PriceManagement priceManagement = new PriceManagement(productData);
         ProductManagement productManagement = new ProductManagement(productData);
 
+        //PL
         InputReader inputReader = new InputReader(productManagement,priceManagement,categoryManagement);
         inputReader.start();
 

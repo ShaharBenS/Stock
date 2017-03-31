@@ -167,12 +167,28 @@ public class InputReader
                      printUpdate(PriceM.addDiscount(prop));
                      break;
                  case 17:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID]\n");
+                     prop = scanner.nextLine();
+                     System.out.print(ProductM.productReport(prop));
                      break;
                  case 18:
+                     System.out.print("Enter properties in the following structure:\n" +
+                             "[ID CATEGORY 1] [ID CATEGORY 2] ...... [ID CATEGORY n]\n");
+                     prop = scanner.nextLine();
+                     String[] productsbyCat = CategoryM.productReportbyCategory(prop);
+                     for(int i=0; i<productsbyCat.length; i++)
+                         System.out.print(productsbyCat[i]);
                      break;
                  case 19:
+                     String[] prodDef = ProductM.getAllDefectProducts();
+                     for(int i=0; i<prodDef.length; i++)
+                         System.out.print(prodDef[i]);
                      break;
                  case 20:
+                     String[] prod = ProductM.getAllProducts();
+                     for(int i=0; i<prod.length; i++)
+                         System.out.print(prod[i]);
                      break;
                  case 21:
                      return; // EXITING!

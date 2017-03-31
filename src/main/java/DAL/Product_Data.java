@@ -60,6 +60,24 @@ public class Product_Data
         }
     }
 
+    public Products[] getAllDefectProducts()
+    {
+        Products[] products = null; //TODO: <<< fix this <<<
+        String query1 = "SELECT * FROM PRODUCTS WHERE AMOUNT_DEFECT > 0 ";
+        //TODO: return array of products with defect amount
+
+        return products;
+    }
+
+    public Products[] getAllProducts()
+    {
+        Products[] products = null; //TODO: <<< fix this <<<
+        String query1 = "SELECT * FROM PRODUCTS";
+        //TODO: return array of products
+
+        return products;
+    }
+
     //RETURN PRODUCT FROM DATABASE IF EXISTS, ELSE RETURN NULL
     public Products getProduct(int id)
     {
@@ -97,7 +115,7 @@ public class Product_Data
 
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            return null;
         }
         return products;
     }

@@ -1,14 +1,7 @@
 package BL;
 
-import DAL.Category_Data;
 import DAL.Product_Data;
-import SharedClasses.Category;
 
-import java.util.Date;
-
-/**
- * Created by Shahar on 29/03/17.
- */
  public class PriceManagement
 {
     private Product_Data PD;

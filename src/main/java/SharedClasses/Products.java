@@ -24,14 +24,14 @@ public class Products
     private Date dataEndDiscount;
     private int discount;
 
-    public Products(int id, String location, String manufacture, int amountInStore,int amountInStorage, int minimalAmount, int catergoryCode, int buyPrice, int sellPrice)
+    public Products(int id, String location, String manufacture, int amountInStore,int amountInWarehouse, int minimalAmount, int catergoryCode, int buyPrice, int sellPrice)
     {
         this.id = id;
         this.location = location;
         this.manufacture = manufacture;
-        this.amountInWarehouse = amountInStorage;
+        this.amountInWarehouse = amountInWarehouse;
         this.amountInStore = amountInStore;
-        this.currentAmount = amountInStorage + amountInStore;
+        this.currentAmount = amountInWarehouse + amountInStore;
         /**/ defectAmount = 0;
         this.catergoryCode = catergoryCode;
         this.minimalAmount = minimalAmount;
@@ -178,5 +178,25 @@ public class Products
     public void setDateEndDiscount(java.sql.Date date_end)
     {
         this.dataEndDiscount = new Date(date_end);
+    }
+
+    public String toString()
+    {
+        String s ="************************\n";
+        s+="Product ID: "+id+ "\n";
+        s+="Location: "+ location+"\n";
+        s+="Manufacture: "+ manufacture+"\n";
+        s+="Current Amount: "+ currentAmount+"\n";
+        s+="Amount in Store: "+ amountInStore+"\n";
+        s+="Amount in Warehouse: "+ amountInWarehouse+"\n";
+        s+="Defect Amount: "+ defectAmount+"\n";
+        s+="Category Code: "+ catergoryCode+"\n";
+        s+="Buy Price: "+ buyPrice+"\n";
+        s+="Sell Price: "+ sellPrice+"\n";
+        s+="Discount: " + discount +"%\n";
+        s+="Discount start date: "+ dateStartDiscount.toString()+"\n";
+        s+="Discount end date: "+dataEndDiscount.toString()+"\n";
+        s+="************************\n";
+        return s;
     }
 }

@@ -19,7 +19,7 @@ public class ProductManagement
     {
         String[] pParts = pLine.split(" ");
         if(pParts.length != 8) return false;
-        Products p = null;
+        Products p;
         try
         {
             /*0*/ int id = Integer.parseInt(pParts[0]);
@@ -32,8 +32,8 @@ public class ProductManagement
             /*7*/ int sell = Integer.parseInt(pParts[7]);
             if(pParts[5].length() != 3) return false;
 
-            //FIX THIS SHIT **NO TOTAL AMOUNT** REMEMBER
-            //p = new Products(id, pParts[1], pParts[2], amount, minimal, cCode, buy, sell);
+
+            p = new Products(id, pParts[1], pParts[2],0, amount, minimal, cCode, buy, sell);
 
         } catch (Exception e) { return false; }
         return PD.addProduct(p);
@@ -131,11 +131,33 @@ public class ProductManagement
         } catch(Exception e){ return  false; }
     }
 
-    public boolean updateCategoryDiscount(int id, int disc)
+    public String productReport(String line)
     {
-        //TODO: need to do this too..
-        return false;
+        if(line.length() != 6) return "Invalid ID";
+        try {
+            int id = Integer.parseInt(line);
+            Products p = PD.getProduct(id);
+            if(p==null) return "ID not found!";
+            else return p.toString();
+        } catch(Exception e){ return  "Invalid ID"; }
     }
 
+    public String[] getAllProducts()
+    {
+        Products[] pList = PD.getAllProducts();
+        String[] allP = new String[pList.length];
+        for(int i=0; i<allP.length; i++)
+            allP[i] = pList[i].toString();
+        return allP;
+    }
 
+    public String[] getAllDefectProducts()
+    {
+        Products[] pList = PD.getAllDefectProducts();
+        if(pList.length == 0) return new String[] {"No Defects found !"};
+        String[] allP = new String[pList.length];
+        for(int i=0; i<allP.length; i++)
+            allP[i] = pList[i].toString();
+        return allP;
+    }
 }
