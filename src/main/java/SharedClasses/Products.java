@@ -1,8 +1,6 @@
 package SharedClasses;
 
 
-import DAL.Product_Data;
-
 /**
  * Created by Shahar on 29/03/17.
  */
@@ -21,7 +19,7 @@ public class Products
     private int buyPrice;
     private int sellPrice;
     private Date dateStartDiscount;
-    private Date dataEndDiscount;
+    private Date dateEndDiscount;
     private int discount;
 
     public Products(int id, String location, String manufacture, int amountInStore,int amountInStorage, int minimalAmount, int catergoryCode, int buyPrice, int sellPrice)
@@ -39,8 +37,16 @@ public class Products
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
         /**/ dateStartDiscount = null;
-        /**/ dataEndDiscount = null;
+        /**/ dateEndDiscount = null;
         /**/ discount = 0;
+    }
+
+    public Products()
+    {
+        dateStartDiscount = null;
+        dateEndDiscount = null;
+        discount = 0;
+        defectAmount = 0;
     }
 
     public boolean equals(Products products)
@@ -52,7 +58,10 @@ public class Products
                 this.amountInWarehouse == products.amountInWarehouse && this.minimalAmount == products.minimalAmount &&
                 this.defectAmount == products.defectAmount && this.catergoryCode == products.catergoryCode &&
                 this.buyPrice == products.buyPrice && this.sellPrice == products.sellPrice &&
-                this.dateStartDiscount.equals(products.dateStartDiscount) && this.dataEndDiscount.equals(products.dataEndDiscount)
+                this.dateStartDiscount == null ? this.dateStartDiscount == products.dateStartDiscount :
+                this.dateStartDiscount.equals(products.dateStartDiscount) &&
+                this.dateStartDiscount == null ? this.dateStartDiscount == products.dateStartDiscount :
+                this.dateEndDiscount.equals(products.dateEndDiscount)
                 && this.discount == products.discount;
     }
 
@@ -137,7 +146,7 @@ public class Products
     }
 
     public Date getDateStartDiscount() {
-        return new Date(dateStartDiscount);
+        return dateStartDiscount == null ? null : new Date(dateStartDiscount);
     }
 
     public void setDateStartDiscount(Date dateStartDiscount)
@@ -146,11 +155,11 @@ public class Products
     }
 
     public Date getDateEndDiscount() {
-        return new Date(dataEndDiscount);
+        return dateEndDiscount == null ? null : new Date(dateEndDiscount);
     }
 
     public void setDateEndDiscount(Date dataEndDiscount) {
-        this.dataEndDiscount = new Date(dataEndDiscount);
+        this.dateEndDiscount = new Date(dataEndDiscount);
     }
 
     public int getDiscount() {
@@ -170,13 +179,13 @@ public class Products
         this.id = id;
     }
 
-    public void setDateStartDiscount(java.sql.Date date_start)
+    public void setDateStartDiscount(String date_start)
     {
-        this.dateStartDiscount = new Date(date_start);
+        this.dateStartDiscount =  date_start.equals("NULL") ? null : new Date(date_start);
     }
 
-    public void setDateEndDiscount(java.sql.Date date_end)
+    public void setDateEndDiscount(String date_end)
     {
-        this.dataEndDiscount = new Date(date_end);
+        this.dateEndDiscount =date_end.equals("NULL") ? null : new Date(date_end);
     }
 }
