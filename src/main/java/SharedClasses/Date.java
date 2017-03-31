@@ -27,9 +27,9 @@ public class Date
         this.month = date.month;
         this.day = date.day;
     }
-    public Date(java.sql.Date date)
+    public Date(String date)
     {
-        System.out.println("This method should be implemented! Class:Date, Line:32");
+
     }
 
     @Override public String toString()
@@ -38,6 +38,7 @@ public class Date
     }
     public boolean equals(Date date)
     {
+        if(date == null){return false;}
         return year == date.year && month == date.month && this.day == date.day;
     }
 }

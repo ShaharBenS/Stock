@@ -47,8 +47,10 @@ public class Product_Data
             _ps.setInt(2,p.getBuyPrice());
             _ps.setInt(3,p.getSellPrice());
             _ps.setInt(4,p.getDiscount());
-            _ps.setString(5,p.getDateStartDiscount().toString());
-            _ps.setString(6,p.getDateEndDiscount().toString());
+            _ps.setString(5,p.getDateStartDiscount() == null ? "NULL" :
+                                                            p.getDateStartDiscount().toString());
+            _ps.setString(6,p.getDateEndDiscount() == null ? "NULL" :
+                                            p.getDateEndDiscount().toString());
 
             _ps.executeUpdate();
 
@@ -82,8 +84,9 @@ public class Product_Data
     public Products getProduct(int id)
     {
         String query1 = "SELECT * FROM PRODUCTS WHERE ID = "+id+";";
-        String query2 = "SELECT ID,PRICE_COST,PRICE_SELL,DISCOUNT,DATE_START,DATE_END FROM PRODUCTS_PRICE" +
-                "JOIN PRODUCTS WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID;";
+        String query2 = "SELECT * " +
+                        "FROM PRODUCTS_PRICE CROSS JOIN PRODUCTS " +
+                        "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID;";
         Products products = null;
         try
         {
@@ -91,14 +94,14 @@ public class Product_Data
             ResultSet result = state.executeQuery(query1);
 
             //TODO:: just initialize the variables in the constractor here ↓↓↓↓ instead of setters!
-            ///*TODO:: look up ! ^^^ this is the line : */products = new Products();
+            products = new Products();
 
             products.setId(result.getInt("ID"));
             products.setLocation(result.getString("LOCATION"));
             products.setManufacture(result.getString("MANUFACTURE"));
             products.setAmountInStore(result.getInt("AMOUNT_STORE"));
             products.setAmountInWarehouse(result.getInt("AMOUNT_STORAGE"));
-            products.setDefectAmount(result.getInt("DEFECT_AMOUNT"));
+            products.setDefectAmount(result.getInt("AMOUNT_DEFECT"));
             products.setMinimalAmount(result.getInt("MINIMAL_AMOUNT"));
             products.setCatergoryCode(result.getInt("CATEGORY_CODE"));
             products.setCurrentAmount(products.getDefectAmount()+products.getAmountInStore()+products.getAmountInWarehouse());
@@ -109,12 +112,13 @@ public class Product_Data
             products.setBuyPrice(result.getInt("PRICE_COST"));
             products.setSellPrice(result.getInt("PRICE_SELL"));
             products.setDiscount(result.getInt("DISCOUNT"));
-            products.setDateStartDiscount(result.getDate("DATE_START"));
-            products.setDateEndDiscount(result.getDate("DATE_END"));
+            products.setDateStartDiscount(result.getString("DATE_START"));
+            products.setDateEndDiscount(result.getString("DATE_END"));
 
 
 
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
         }
         return products;

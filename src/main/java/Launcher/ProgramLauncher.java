@@ -82,8 +82,8 @@ public class ProgramLauncher
                     " PRICE_COST     INT    NOT NULL, " +
                     " PRICE_SELL     INT     NOT NULL, " +
                     " DISCOUNT       INT CHECK(DISCOUNT >= 0 AND DISCOUNT <=100), " +
-                    " DATE_START     DATE CHECK(DATE_START >= CURRENT_DATE) NOT NULL," +
-                    " DATE_END       DATE CHECK(DATE_END > DATE_START) NOT NULL," +
+                    " DATE_START     DATE," +
+                    " DATE_END       DATE," +
                     " FOREIGN KEY(ID) REFERENCES  PRODUCTS(ID));";
             stmt.executeUpdate(sql);
             stmt.close();
