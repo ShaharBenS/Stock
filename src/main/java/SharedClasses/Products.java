@@ -182,12 +182,12 @@ public class Products
 
     public void setDateStartDiscount(String date_start)
     {
-        this.dateStartDiscount =  date_start.equals("NULL") ? null : new Date(date_start);
+        this.dateStartDiscount = date_start.equals("NULL") ? null : new Date(date_start);
     }
 
     public void setDateEndDiscount(String date_end)
     {
-        this.dateEndDiscount =date_end.equals("NULL") ? null : new Date(date_end);
+        this.dateEndDiscount = date_end.equals("NULL") ? null : new Date(date_end);
     }
 
     public String toString()

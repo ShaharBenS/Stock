@@ -70,7 +70,6 @@ public class DAL_Tests
         Products p1 = new Products(0,"LOCATION-0","MANUFACTURE-0",
                 5,10,2,0,5,10);
 
-
         if(!PD.addProduct(p1))
         {
             fail("Failed adding producs");

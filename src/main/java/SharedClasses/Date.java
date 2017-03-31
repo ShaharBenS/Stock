@@ -29,12 +29,15 @@ public class Date
     }
     public Date(String date)
     {
-
+        String [] strings = date.split("\\.");
+        day = Byte.parseByte(strings[0]);
+        month = Byte.parseByte(strings[1]);
+        year = Short.parseShort(strings[2]);
     }
 
     @Override public String toString()
     {
-        return day+"/"+month+"/"+year;
+        return day+"."+month+"."+year;
     }
     public boolean equals(Date date)
     {
