@@ -17,7 +17,7 @@ public class ProductManagement
     // FORMAT: [0:ID] [1:LOCATION] [2:MANUFACTURE] [3:CURRENT AMOUNT] [4:MINIMAL AMOUNT] [5:CATEGORY CODE] [6:BUY PRICE] [7:SELL PRICE]
     public boolean addProduct(String pLine)
     {
-        String[] pParts = pLine.split(" ");
+        String[] pParts = pLine.split("\\s+");
         if(pParts.length != 8) return false;
         Products p;
         try
@@ -47,7 +47,7 @@ public class ProductManagement
 
     public boolean updateProductId(String ids)
     {
-        String[] sid = ids.split(" ");
+        String[] sid = ids.split("\\s+");
         if(sid.length != 2) return false;
         try{
             int id = Integer.parseInt(sid[0]);
@@ -58,7 +58,7 @@ public class ProductManagement
 
     public boolean updateProductLocation(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int id = Integer.parseInt(prop[0]);
@@ -68,7 +68,7 @@ public class ProductManagement
 
     public boolean updateProductManufacture(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int id = Integer.parseInt(prop[0]);
@@ -78,7 +78,7 @@ public class ProductManagement
 
     public boolean updateProductAmountInWarehouse(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int num1 = Integer.parseInt(prop[0]);
@@ -89,7 +89,7 @@ public class ProductManagement
 
     public boolean updateProductAmountInStore(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int num1 = Integer.parseInt(prop[0]);
@@ -100,7 +100,7 @@ public class ProductManagement
 
     public boolean updateProductDefectAmount(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int num1 = Integer.parseInt(prop[0]);
@@ -111,7 +111,7 @@ public class ProductManagement
 
     public boolean updateProductCategoryCode(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int num1 = Integer.parseInt(prop[0]);
@@ -122,7 +122,7 @@ public class ProductManagement
 
     public boolean updateProductMinimalAmount(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int num1 = Integer.parseInt(prop[0]);

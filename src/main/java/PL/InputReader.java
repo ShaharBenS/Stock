@@ -69,7 +69,7 @@ public class InputReader
                  case 1:
                      System.out.print("Enter the Products properties (separated by 1 space!) in the following structure:\n" +
                              "[ID] [LOCATION] [MANUFACTURE] [CURRENT AMOUNT] [MINIMAL AMOUNT] [CATEGORY CODE] [BUY PRICE] [SELL PRICE]\n");
-                     String productLine = scanner.next();
+                     String productLine = scanner.nextLine();
                      if(ProductM.addProduct(productLine))
                          System.out.print(" >> Product added successfully\n");
                      else System.out.print(" >> Invalid arguments. Try again\n");

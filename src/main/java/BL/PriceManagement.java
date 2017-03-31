@@ -15,7 +15,7 @@ import DAL.Product_Data;
 
     public boolean updateBuyPrice(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int num1 = Integer.parseInt(prop[0]);
@@ -26,7 +26,7 @@ import DAL.Product_Data;
 
     public boolean updateSellPrice(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             int num1 = Integer.parseInt(prop[0]);
@@ -37,15 +37,15 @@ import DAL.Product_Data;
 
     public boolean addDiscount(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length == 4) return false;
         try{
             int id = Integer.parseInt(prop[0]);
             if(prop[0].length() == 6)
             {
                 int disc = Integer.parseInt(prop[1]);
-                String[] start = prop[2].split(" ");
-                String[] end = prop[3].split(" ");
+                String[] start = prop[2].split("\\s+");
+                String[] end = prop[3].split("\\s+");
                 if(start.length != 3 || end.length != 3) return false;
                 SharedClasses.Date Dstart = new SharedClasses.Date(Integer.parseInt(start[0]),Integer.parseInt(start[1]),Integer.parseInt(start[2]));
                 SharedClasses.Date Dend = new SharedClasses.Date(Integer.parseInt(end[0]),Integer.parseInt(end[1]),Integer.parseInt(end[2]));
@@ -54,8 +54,8 @@ import DAL.Product_Data;
             else if(prop[0].length() == 3)
             {
                 int disc = Integer.parseInt(prop[1]);
-                String[] start = prop[2].split(" ");
-                String[] end = prop[3].split(" ");
+                String[] start = prop[2].split("\\s+");
+                String[] end = prop[3].split("\\s+");
                 if(start.length != 3 || end.length != 3) return false;
                 SharedClasses.Date Dstart = new SharedClasses.Date(Integer.parseInt(start[0]),Integer.parseInt(start[1]),Integer.parseInt(start[2]));
                 SharedClasses.Date Dend = new SharedClasses.Date(Integer.parseInt(end[0]),Integer.parseInt(end[1]),Integer.parseInt(end[2]));

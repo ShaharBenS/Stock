@@ -18,7 +18,7 @@ public class CategoryManagement
 
     public boolean addCategory(String line)
     {
-        String[] cParts = line.split(" ");
+        String[] cParts = line.split("\\s+");
         if(cParts.length != 2 && cParts.length != 3) return false;
         Category c;
         try
@@ -26,7 +26,7 @@ public class CategoryManagement
             /*0*/ int id = Integer.parseInt(cParts[0]);
             if(cParts[0].length() != 3) return false;
             /*1*/ /* << NOTHING TO CHECK << */
-            int idF = 0;
+            int idF = -1;
             if(cParts.length == 3) {
                 if (cParts[0].length() != 3) return false;
                 else idF = Integer.parseInt(cParts[2]);
@@ -47,7 +47,7 @@ public class CategoryManagement
 
     public boolean updateCategoryId(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             if(prop[0].length() != 3 || prop[1].length() != 3) return false;
@@ -58,7 +58,7 @@ public class CategoryManagement
     }
     public boolean updateCategoryName(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             if(prop[0].length() != 3) return false;
@@ -68,7 +68,7 @@ public class CategoryManagement
     }
     public boolean updateCategoryIdFather(String line)
     {
-        String[] prop = line.split(" ");
+        String[] prop = line.split("\\s+");
         if(prop.length != 2) return false;
         try{
             if(prop[0].length() != 3 || prop[1].length() != 3) return false;
@@ -80,7 +80,7 @@ public class CategoryManagement
 
     public String[] productReportbyCategory(String line)
     {
-        String[] cats = line.split(" ");
+        String[] cats = line.split("\\s+");
         Category[] cArr = new Category[cats.length];
         for(int i=0; i<cArr.length; i++)
         {
