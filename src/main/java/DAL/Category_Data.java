@@ -10,7 +10,7 @@ import java.sql.*;
  */
 public class  Category_Data
 {
-    Connection connection;
+    private Connection connection;
     public Category_Data(Connection c)
     {
         connection = c;
@@ -33,6 +33,23 @@ public class  Category_Data
             return false;
         }
 
+    }
+    public boolean categoryExists(int id)
+    {
+        String query = "SELECT * FROM CATEGORY WHERE ID = "+id+";";
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            if(!result.next())
+            {
+                return false;
+            }
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return true;
+        }
     }
     /*
         If category not found returns NULL

@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 public class Product_Data
 {
 
-    Connection connection;
+    private Connection connection;
     public Product_Data(Connection c)
     {
         connection = c;
