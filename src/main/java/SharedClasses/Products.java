@@ -204,7 +204,7 @@ public class Products
         s+="Sell Price: "+ sellPrice+"\n";
         s+="Discount: " + discount +"%\n";
         s+="Discount start date: "+ dateStartDiscount.toString()+"\n";
-        s+="Discount end date: "+dataEndDiscount.toString()+"\n";
+        s+="Discount end date: "+ dateEndDiscount.toString()+"\n";
         s+="************************\n";
         return s;
     }

@@ -73,7 +73,7 @@ public class Product_Data
 
     public Products[] getAllProducts()
     {
-        Products[] products = null; //TODO: <<< fix this <<<
+        Products[] products = new Products[]{}; //TODO: <<< fix this <<<
         String query1 = "SELECT * FROM PRODUCTS";
         //TODO: return array of products
 

@@ -60,7 +60,7 @@ public class InputReader
              {
                  System.out.print(MENU[i]+"\n");
              }
-             try { operation = scanner.nextInt(); }
+             try { operation = Integer.parseInt(scanner.nextLine()); }
              catch(Exception r) { System.out.print("Invalid operation. Please try again\n\n"); continue; }
 
              String prop;
@@ -69,7 +69,7 @@ public class InputReader
                  case 1:
                      System.out.print("Enter the Products properties (separated by 1 space!) in the following structure:\n" +
                              "[ID] [LOCATION] [MANUFACTURE] [CURRENT AMOUNT] [MINIMAL AMOUNT] [CATEGORY CODE] [BUY PRICE] [SELL PRICE]\n");
-                     String productLine = scanner.nextLine();
+                     String productLine = scanner.next();
                      if(ProductM.addProduct(productLine))
                          System.out.print(" >> Product added successfully\n");
                      else System.out.print(" >> Invalid arguments. Try again\n");
