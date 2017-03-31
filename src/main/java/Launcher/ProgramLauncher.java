@@ -52,13 +52,16 @@ public class ProgramLauncher
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:"+dataBaseName);
 
+            c.createStatement().execute("PRAGMA FOREIGN_KEYS = ON;" +
+                    "PRAGMA FOREIGN_KEYS;");
+
             /*Creating Tables if they are NOT existed */
             stmt = c.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS CATEGORY " +
-                    "(ID INT PRIMARY KEY     NOT NULL," +
-                    " NAME           CHAR(50) NOT NULL, " +
-                    " ID_FATHER      INT     , " +
-                    " FOREIGN KEY(ID_FATHER) REFERENCES CATEGORY(ID))";
+                        "(ID INT PRIMARY KEY     NOT NULL ," +
+                        " NAME           CHAR(50) NOT NULL, " +
+                        " ID_FATHER      INT   ," +
+                        " FOREIGN KEY(ID_FATHER) REFERENCES CATEGORY(ID));";
             stmt.executeUpdate(sql);
             stmt.close();
 
