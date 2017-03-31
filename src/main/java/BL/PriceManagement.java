@@ -38,17 +38,17 @@ import DAL.Product_Data;
     public boolean addDiscount(String line)
     {
         String[] prop = line.split("\\s+");
-        if(prop.length == 4) return false;
+        if(prop.length != 4) return false;
         try{
             int id = Integer.parseInt(prop[0]);
             if(prop[0].length() == 6)
             {
                 int disc = Integer.parseInt(prop[1]);
-                String[] start = prop[2].split("\\s+");
-                String[] end = prop[3].split("\\s+");
+                String[] start = prop[2].split("\\.");
+                String[] end = prop[3].split("\\.");
                 if(start.length != 3 || end.length != 3) return false;
-                SharedClasses.Date Dstart = new SharedClasses.Date(Integer.parseInt(start[0]),Integer.parseInt(start[1]),Integer.parseInt(start[2]));
-                SharedClasses.Date Dend = new SharedClasses.Date(Integer.parseInt(end[0]),Integer.parseInt(end[1]),Integer.parseInt(end[2]));
+                SharedClasses.Date Dstart = new SharedClasses.Date(Integer.parseInt(start[2]),Integer.parseInt(start[1]),Integer.parseInt(start[0]));
+                SharedClasses.Date Dend = new SharedClasses.Date(Integer.parseInt(end[2]),Integer.parseInt(end[1]),Integer.parseInt(end[0]));
                 return (PD.updateProductDiscount(id, disc) && PD.updateStartDate(id,Dstart) && PD.updateEndDate(id, Dend));
             }
             else if(prop[0].length() == 3)
@@ -57,8 +57,8 @@ import DAL.Product_Data;
                 String[] start = prop[2].split("\\s+");
                 String[] end = prop[3].split("\\s+");
                 if(start.length != 3 || end.length != 3) return false;
-                SharedClasses.Date Dstart = new SharedClasses.Date(Integer.parseInt(start[0]),Integer.parseInt(start[1]),Integer.parseInt(start[2]));
-                SharedClasses.Date Dend = new SharedClasses.Date(Integer.parseInt(end[0]),Integer.parseInt(end[1]),Integer.parseInt(end[2]));
+                SharedClasses.Date Dstart = new SharedClasses.Date(Integer.parseInt(start[2]),Integer.parseInt(start[1]),Integer.parseInt(start[0]));
+                SharedClasses.Date Dend = new SharedClasses.Date(Integer.parseInt(end[2]),Integer.parseInt(end[1]),Integer.parseInt(end[0]));
                 return (PD.updateCategoryDiscount(id, disc) && PD.updateStartDate(id,Dstart) && PD.updateEndDate(id, Dend));
             }
             else return false;

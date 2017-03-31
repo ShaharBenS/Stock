@@ -77,7 +77,7 @@ public class CategoryManagement
             if(prop[0].length() != 3 || prop[1].length() != 3) return false;
             int id = Integer.parseInt(prop[0]);
             int nid = Integer.parseInt(prop[1]);
-            return _CD.updateCategoryId(id, nid);
+            return _CD.updateCategoryIdFather(id, nid);
         } catch(Exception e){ return  false; }
     }
 
