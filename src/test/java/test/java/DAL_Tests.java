@@ -90,7 +90,29 @@ public class DAL_Tests
     }
     @Test public void price_testUpdate()
     {
+        Category c1 = new Category(0, "CATEGORY_0");
+        CD.addCategory(c1);
 
+        Products p1 = new Products(0,"LOCATION-0","MANUFACTURE-0",
+                5,10,2,0,5,10);
+        p1.setDefectAmount(2);
+        p1.setAmountInStore(p1.getAmountInStore()-p1.getDefectAmount());
+        p1.setCurrentAmount(p1.getAmountInWarehouse()+p1.getAmountInStore()+p1.getDefectAmount());
+
+        Products p2 = new Products(1,"LOCATION-1","MANUFACTURE-1",
+                3,5,2,0,2,10);
+        p2.setDefectAmount(2);
+        p2.setAmountInStore(p2.getAmountInStore()-p2.getDefectAmount());
+        p2.setCurrentAmount(p2.getAmountInWarehouse()+p2.getAmountInStore()+p2.getDefectAmount());
+
+        p1.setBuyPrice(5);
+        PD.updateBuyPrice(0,2);
+
+        p2.setLocation("LOCATION-2");
+        PD.updateProductLocation(1,"LOCATION-2");
+
+        assertEquals(PD.getProduct(0).equals(p1),true);
+        assertEquals(PD.getProduct(1).equals(p2),true);
     }
 
     @Test public void test_getAllDefectProducts()

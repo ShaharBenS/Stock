@@ -90,11 +90,15 @@ public class CategoryManagement
             if(cats[i].length() != 3) return new String[] {"1 or more INVALID ID"};
             cArr[i] = _CD.getCategory(id);
         }
-        Products[] products = _CD.getAllProductsbyCat(cArr);
+        /*
+            TODO : move this to the Product Managment I prefer it would be there
+         */
+        /*Products[] products = _CD.getAllProductsbyCat(cArr);
         String[] plist = new String[products.length];
         for(int i=0; i<plist.length; i++)
             plist[i] = products[i].toString();
-        return plist;
+        return plist;*/
+        return null;
     }
 
 }
