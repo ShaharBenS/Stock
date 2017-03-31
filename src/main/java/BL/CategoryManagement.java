@@ -31,7 +31,7 @@ public class CategoryManagement
             /*1*/ /* << NOTHING TO CHECK << */
             int idF = -1;
             if(cParts.length == 3) {
-                if (cParts[0].length() != 3) return false;
+                if (cParts[2].length() != 3) return false;
                 else idF = Integer.parseInt(cParts[2]);
             }
 
