@@ -17,14 +17,6 @@ public class  Category_Data
     }
 
 
-    public Products[] getAllProductsbyCat(Category[] c)
-    {
-        /*TODO:: Need to get all products from the 1st category, and then move to next caterory...
-          TODO:: We can add all products to a vector or a list and then convert it to array.
-         */
-        return new Products[] {};
-    }
-
     public boolean addCategory(Category c)
     {
         String query = "INSERT INTO CATEGORY(ID,NAME,ID_FATHER) VALUES(?,?,?)";

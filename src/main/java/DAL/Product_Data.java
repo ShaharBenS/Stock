@@ -1,11 +1,13 @@
 package DAL;
 
+import SharedClasses.Category;
 import SharedClasses.Products;
 import SharedClasses.Date;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -127,11 +129,39 @@ public class Product_Data
 
     public Products[] getAllProducts()
     {
-        Products[] products = new Products[]{}; //TODO: <<< fix this <<<
-        String query1 = "SELECT * FROM PRODUCTS";
-        //TODO: return array of products
+        Products [] products = null;
+        String query =  "SELECT * " +
+                        "FROM PRODUCTS CROSS JOIN PRODUCTS_PRICE " +
+                        "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID";
+
+        try
+        {
+            List<Products> productsArrayList = new ArrayList<Products>();
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            int index = 0;
+            while(result.next())
+            {
+                productsArrayList.add(buildProductFromResultSet(result));
+                index++;
+            }
+            products = new Products[index];
+            products = productsArrayList.toArray(products);
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
 
         return products;
+    }
+
+    public Products[] getAllProductsbyCat(Category[] c)
+    {
+        /*TODO:: Need to get all products from the 1st category, and then move to next caterory...
+          TODO:: We can add all products to a vector or a list and then convert it to array.
+         */
+        return new Products[] {};
     }
 
     public boolean updateCategoryDiscount(int id,int discount)
