@@ -1,5 +1,6 @@
 package test.java;
 
+import BL.CategoryManagement;
 import BL.ProductManagement;
 import DAL.Category_Data;
 import DAL.Product_Data;
@@ -22,31 +23,32 @@ public class BLTester {
     Category_Data CD;
 
     ProductManagement PM;
+    CategoryManagement CM;
 
     Connection connection = null;
 
     @Before
     public void setUp()
     {
-        connection = ProgramLauncher.getConnectionAndInitDatabase("tests_bl.db");
+        connection = ProgramLauncher.getConnectionAndInitDatabase("tests.db");
         PD = new Product_Data(connection);
         CD = new Category_Data(connection);
         PM = new ProductManagement(PD);
+        CM = new CategoryManagement(CD,PD);
     }
 
     @Test
     public void category_testInsertion()
     {
-        Category c1 = new Category(0,"CATEGORY_0");
-        Category c2 = new Category(1,"CATEGORY_1",0);
-
-        if((!CD.addCategory(c1) | !CD.addCategory(c2)))
+        String c1 = "100 CATEGORY_0";
+        String c2 = "101 CATEGORY_1 100";
+        if((!CM.addCategory(c1) | !CM.addCategory(c2)))
         {
             fail("Failed adding c1 and c2 to dataBase");
         }
 
-        assertEquals(CD.getCategory(0).equals(c1),true);
-        assertEquals(CD.getCategory(1).equals(c2),true);
+        assertEquals(CD.getCategory(100).equals(new Category(c1)),true);
+        assertEquals(CD.getCategory(101).equals(new Category(c2)),true);
 
     }
 

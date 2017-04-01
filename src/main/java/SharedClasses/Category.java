@@ -26,6 +26,16 @@ public class Category
         id = 0;name = ""; idFather = 0;
     }
 
+    public Category(String s)
+    {
+        String[] parts = s.split("\\s+");
+        id = Integer.parseInt(parts[0]);
+        name = parts[1];
+        try{
+            idFather = Integer.parseInt(parts[2]);
+        }catch(Exception e){idFather = -1;}
+    }
+
     public int getId() {
         return id;
     }
