@@ -245,8 +245,13 @@ public class Product_Data
 
     public boolean updateCategoryDiscount(int id,int discount, Date start, Date end)
     {
-        //TODO:: its the most complicated thing cuz we need to update discount to all the products in the sub-category of this one's id..
-        return false;
+        Products [] products = getAllProductsbyCat(new Category[]{new Category(id,"")});
+        for (Products product : products) {
+            updateProductDiscount(product.getId(), discount);
+            updateStartDate(product.getId(), start);
+            updateEndDate(product.getId(), end);
+        }
+        return true;
     }
 
     //RETURN PRODUCT FROM DATABASE IF EXISTS, ELSE RETURN NULL
