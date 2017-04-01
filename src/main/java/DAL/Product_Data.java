@@ -1,13 +1,12 @@
 package DAL;
 
 import SharedClasses.Category;
-import SharedClasses.Products;
 import SharedClasses.Date;
+import SharedClasses.Products;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -134,7 +133,7 @@ public class Product_Data
         {
             c.setId(result.getInt("ID"));
             c.setName(result.getString("NAME"));
-            String id_father = result.getString("IF_FATHER");
+            String id_father = result.getString("ID_FATHER");
             if(id_father == null)
             {
                 c.setIdFather(-1);
@@ -245,8 +244,13 @@ public class Product_Data
 
     public boolean updateCategoryDiscount(int id,int discount, Date start, Date end)
     {
-        //TODO:: its the most complicated thing cuz we need to update discount to all the products in the sub-category of this one's id..
-        return false;
+        Products [] products = getAllProductsbyCat(new Category[]{new Category(id,"")});
+        for (Products product : products) {
+            updateProductDiscount(product.getId(), discount);
+            updateStartDate(product.getId(), start);
+            updateEndDate(product.getId(), end);
+        }
+        return true;
     }
 
     //RETURN PRODUCT FROM DATABASE IF EXISTS, ELSE RETURN NULL
