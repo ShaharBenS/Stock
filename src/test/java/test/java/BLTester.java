@@ -53,7 +53,7 @@ public class BLTester {
         assertEquals(CD.getCategory(101).equals(new Category(c2)),true);
 
     }
-    @After void tearDown()
+    @After public void tearDown()
     {
         PD = null;
         CD = null;
