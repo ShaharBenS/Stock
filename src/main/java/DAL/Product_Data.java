@@ -190,7 +190,7 @@ public class Product_Data
             {
                 String query1 = "SELECT PRODUCTS.*,PRODUCTS_PRICE.*" +
                         "FROM PRODUCTS CROSS JOIN PRODUCTS_PRICE CROSS JOIN CATEGORY " +
-                        "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID AND PRODUCTS.CATEGORY_CODE = CATEGORY.ID" +
+                        "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID AND PRODUCTS.CATEGORY_CODE = CATEGORY.ID " +
                         "AND (";
                 for (int i = 0; i < c.length; i++) {
                     if (i == c.length - 1) {
@@ -208,7 +208,7 @@ public class Product_Data
                     index++;
                 }
                 List<Category> c_list = new ArrayList<Category>();
-                String query2 = "SELECT CATEGORY.* " +
+                String query2 = "SELECT C.* " +
                                 "FROM CATEGORY AS C " +
                                 "WHERE ( ";
                 for(int i = 0 ; i < c.length; i++)
