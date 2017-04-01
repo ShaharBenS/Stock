@@ -1,13 +1,12 @@
 package DAL;
 
 import SharedClasses.Category;
-import SharedClasses.Products;
 import SharedClasses.Date;
+import SharedClasses.Products;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Created by Shahar on 29/03/17.
@@ -134,7 +133,7 @@ public class Product_Data
         {
             c.setId(result.getInt("ID"));
             c.setName(result.getString("NAME"));
-            String id_father = result.getString("IF_FATHER");
+            String id_father = result.getString("ID_FATHER");
             if(id_father == null)
             {
                 c.setIdFather(-1);
