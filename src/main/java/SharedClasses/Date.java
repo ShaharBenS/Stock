@@ -23,12 +23,20 @@ public class Date
     }
     public Date(Date date)
     {
+        if(date == null)
+        {
+            return;
+        }
         this.year = date.year;
         this.month = date.month;
         this.day = date.day;
     }
     public Date(String date)
     {
+        if(date == null)
+        {
+            return;
+        }
         try {
             String[] parts = date.split("\\.");
             this.day = Byte.parseByte(parts[0]);
