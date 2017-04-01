@@ -126,7 +126,30 @@ public class Product_Data
 
         return p;
     }
+    private Category buildCategoryFromResultSet(ResultSet result)
+    {
+        Category c = new Category();
 
+        try
+        {
+            c.setId(result.getInt("ID"));
+            c.setName(result.getString("NAME"));
+            String id_father = result.getString("IF_FATHER");
+            if(id_father == null)
+            {
+                c.setIdFather(-1);
+            }
+            else
+            {
+                c.setIdFather(Integer.parseInt(id_father));
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return c;
+    }
     public Products[] getAllProducts()
     {
         Products [] products = null;
@@ -158,10 +181,66 @@ public class Product_Data
 
     public Products[] getAllProductsbyCat(Category[] c)
     {
-        /*TODO:: Need to get all products from the 1st category, and then move to next caterory...
-          TODO:: We can add all products to a vector or a list and then convert it to array.
-         */
-        return new Products[] {};
+        Products [] products = {};
+        List<Products> productsList = new ArrayList<Products>();
+        int index = 0;
+        int c_index = 0;
+        try {
+            while (c.length != 0)
+            {
+                String query1 = "SELECT PRODUCTS.*,PRODUCTS_PRICE.*" +
+                        "FROM PRODUCTS CROSS JOIN PRODUCTS_PRICE CROSS JOIN CATEGORY " +
+                        "WHERE PRODUCTS.ID = PRODUCTS_PRICE.ID AND PRODUCTS.CATEGORY_CODE = CATEGORY.ID " +
+                        "AND (";
+                for (int i = 0; i < c.length; i++) {
+                    if (i == c.length - 1) {
+                        query1 += "CATEGORY.ID = " + c[i].getId() + " );";
+                        break;
+                    }
+                    query1 += "CATEGORY.ID = " + c[i].getId() + " OR ";
+                }
+
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query1);
+                while(resultSet.next())
+                {
+                    productsList.add(buildProductFromResultSet(resultSet));
+                    index++;
+                }
+                List<Category> c_list = new ArrayList<Category>();
+                String query2 = "SELECT C.* " +
+                                "FROM CATEGORY AS C " +
+                                "WHERE ( ";
+                for(int i = 0 ; i < c.length; i++)
+                {
+                    if(i == c.length-1)
+                    {
+                        query2+= "C.ID_FATHER = "+c[i].getId()+");";
+                        break;
+                    }
+                    query2 += "C.ID_FATHER = "+c[i].getId()+" OR ";
+                }
+                statement = connection.createStatement();
+                resultSet = statement.executeQuery(query2);
+                while(resultSet.next())
+                {
+                    c_list.add(buildCategoryFromResultSet(resultSet));
+                    c_index++;
+                }
+                c = new Category[c_index];
+                c_index = 0;
+                c = c_list.toArray(c);
+
+            }
+            products = new Products[index];
+            products = productsList.toArray(products);
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+        }
+        return products;
     }
 
     public boolean updateCategoryDiscount(int id,int discount, Date start, Date end)

@@ -80,8 +80,27 @@ public class DAL_Tests
 
 
     }
-    @Test public void products_testDeletion()
+    @Test public void test_getAllProductsByCategory()
     {
+        Category c1 = new Category(0,"C-0");
+        Category c2 = new Category(1,"C-1",0);
+        Category c3 = new Category(2,"C-2",1);
+        Category c4 = new Category(3,"C-3",0);
+
+        CD.addCategory(c1);CD.addCategory(c2);CD.addCategory(c3);CD.addCategory(c4);
+
+        Products p1 = new Products(0,"L-0","M-0",1,1,0,0,2,10);
+        Products p2 = new Products(1,"L-1","M-1",1,1,0,2,2,10);
+        Products p3 = new Products(2,"L-2","M-2",1,1,0,3,2,10);
+
+        PD.addProduct(p1);PD.addProduct(p2);PD.addProduct(p3);
+
+        Category [] categories = {c1};
+
+        Products [] productss = PD.getAllProductsbyCat(categories);
+
+        System.out.println(productss.length);
+
 
     }
     @Test public void products_testUpdate()
