@@ -61,7 +61,7 @@ public class Products
                 && this.discount == products.discount;
         boolean condition2 =((this.dateStartDiscount == null) ? null == products.dateStartDiscount :
                 this.dateStartDiscount.equals(products.dateStartDiscount)) &&
-                ((this.dateStartDiscount == null) ? this.dateStartDiscount == products.dateStartDiscount :
+                ((this.dateEndDiscount == null) ? null == products.dateEndDiscount :
                         this.dateEndDiscount.equals(products.dateEndDiscount));
         return condition1 && condition2;
     }

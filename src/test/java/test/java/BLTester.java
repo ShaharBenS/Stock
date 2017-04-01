@@ -6,10 +6,12 @@ import DAL.Category_Data;
 import DAL.Product_Data;
 import Launcher.ProgramLauncher;
 import SharedClasses.Category;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -51,5 +53,16 @@ public class BLTester {
         assertEquals(CD.getCategory(101).equals(new Category(c2)),true);
 
     }
-
+    @After void tearDown()
+    {
+        PD = null;
+        CD = null;
+        PM = null;
+        CM = null;
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
