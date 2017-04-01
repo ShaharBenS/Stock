@@ -96,7 +96,19 @@ public class ProductManagement
         try{
             int num1 = Integer.parseInt(prop[0]);
             int num2 = Integer.parseInt(prop[1]);
-            return PD.updateProductAmountInStore(num1, num2);
+            Products p = PD.getProduct(num1);
+            if(p.getAmountInStore() > num2)
+            {
+                return PD.updateProductAmountInStore(num1, num2);
+            }
+            else
+            {
+                if(p.getAmountInWarehouse() - num2 +p.getAmountInStore()< 0) return false;
+                boolean ans = updateProductAmountInWarehouse(""+num1+" "+( p.getAmountInWarehouse() - num2 + p.getAmountInStore()));
+                if(!ans) return false;
+                boolean ans2 = PD.updateProductAmountInStore(num1, num2);
+                return ans2;
+            }
         } catch(Exception e){ return  false; }
     }
 

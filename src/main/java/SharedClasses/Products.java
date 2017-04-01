@@ -200,7 +200,7 @@ public class Products
         s+="Amount in Store: "+ amountInStore+"\n";
         s+="Amount in Warehouse: "+ amountInWarehouse+"\n";
         s+="Defect Amount: "+ defectAmount+"\n";
-        s+="Minimal Amount"+minimalAmount+"\n";
+        s+="Minimal Amount: "+minimalAmount+"\n";
         s+="Category Code: "+ categoryCode +"\n";
         s+="Buy Price: "+ buyPrice+"\n";
         s+="Sell Price: "+ sellPrice+"\n";
