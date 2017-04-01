@@ -164,7 +164,7 @@ public class Product_Data
         return new Products[] {};
     }
 
-    public boolean updateCategoryDiscount(int id,int discount)
+    public boolean updateCategoryDiscount(int id,int discount, Date start, Date end)
     {
         //TODO:: its the most complicated thing cuz we need to update discount to all the products in the sub-category of this one's id..
         return false;

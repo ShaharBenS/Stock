@@ -59,7 +59,7 @@ import DAL.Product_Data;
                 if(start.length != 3 || end.length != 3) return false;
                 SharedClasses.Date Dstart = new SharedClasses.Date(Integer.parseInt(start[2]),Integer.parseInt(start[1]),Integer.parseInt(start[0]));
                 SharedClasses.Date Dend = new SharedClasses.Date(Integer.parseInt(end[2]),Integer.parseInt(end[1]),Integer.parseInt(end[0]));
-                return (PD.updateCategoryDiscount(id, disc) && PD.updateStartDate(id,Dstart) && PD.updateEndDate(id, Dend));
+                return (PD.updateCategoryDiscount(id, disc ,Dstart,Dend));
             }
             else return false;
         } catch(Exception e){ return  false; }

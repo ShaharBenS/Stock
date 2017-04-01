@@ -200,6 +200,7 @@ public class Products
         s+="Amount in Store: "+ amountInStore+"\n";
         s+="Amount in Warehouse: "+ amountInWarehouse+"\n";
         s+="Defect Amount: "+ defectAmount+"\n";
+        s+="Minimal Amount"+minimalAmount+"\n";
         s+="Category Code: "+ categoryCode +"\n";
         s+="Buy Price: "+ buyPrice+"\n";
         s+="Sell Price: "+ sellPrice+"\n";
@@ -208,6 +209,34 @@ public class Products
         else s+="Discount start date: "+ dateStartDiscount.toString()+"\n";
         if(dateEndDiscount == null) s+="Discount end date: NULL\n";
         else s+="Discount end date: "+ dateEndDiscount.toString()+"\n";
+        s+="************************\n";
+        return s;
+    }
+
+    public String toStringDefects()
+    {
+        String s ="************************\n";
+        s+="Product ID: "+id+ "\n";
+        s+="Location: "+ location+"\n";
+        s+="Manufacture: "+ manufacture+"\n";
+        s+="Current Amount: "+ currentAmount+"\n";
+        s+="Amount in Store: "+ amountInStore+"\n";
+        s+="Amount in Warehouse: "+ amountInWarehouse+"\n";
+        s+="Defect Amount: "+ defectAmount+"\n";
+        s+="Category Code: "+ categoryCode +"\n";
+        s+="************************\n";
+        return s;
+    }
+
+    public String toStringStock()
+    {
+        String s ="************************\n";
+        s+="Product ID: "+id+ "\n";
+        s+="Current Amount: "+ currentAmount+"\n";
+        s+="Amount in Store: "+ amountInStore+"\n";
+        s+="Amount in Warehouse: "+ amountInWarehouse+"\n";
+        s+="Defect Amount: "+ defectAmount+"\n";
+        s+="Minimal Amount"+minimalAmount+"\n";
         s+="************************\n";
         return s;
     }

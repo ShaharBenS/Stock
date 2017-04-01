@@ -83,7 +83,9 @@ public class ProductManagement
         try{
             int num1 = Integer.parseInt(prop[0]);
             int num2 = Integer.parseInt(prop[1]);
-            return PD.updateProductAmountInWarehouse(num1, num2);
+            boolean ans = PD.updateProductAmountInWarehouse(num1, num2);
+            checkIfNeedToAlert(num1);
+            return ans;
         } catch(Exception e){ return  false; }
     }
 
@@ -127,7 +129,9 @@ public class ProductManagement
         try{
             int num1 = Integer.parseInt(prop[0]);
             int num2 = Integer.parseInt(prop[1]);
-            return PD.updateProductMinimalAmount(num1, num2);
+            boolean ans = PD.updateProductMinimalAmount(num1, num2);
+            checkIfNeedToAlert(num1);
+            return ans;
         } catch(Exception e){ return  false; }
     }
 
@@ -138,7 +142,7 @@ public class ProductManagement
             int id = Integer.parseInt(line);
             Products p = PD.getProduct(id);
             if(p==null) return "ID not found!";
-            else return p.toString();
+            else return p.toStringStock();
         } catch(Exception e){ return  "Invalid ID"; }
     }
 
@@ -157,8 +161,21 @@ public class ProductManagement
         if(pList.length == 0) return new String[] {"No Defects found !"};
         String[] allP = new String[pList.length];
         for(int i=0; i<allP.length; i++)
-            allP[i] = pList[i].toString();
+            allP[i] = pList[i].toStringDefects();
         return allP;
+    }
+
+    private void checkIfNeedToAlert(int id)
+    {
+        Products products = PD.getProduct(id);
+        if(products.getAmountInWarehouse() <= products.getMinimalAmount())
+        {
+            System.out.print(" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+            System.out.print(" >>>>>             A L E R T            >>>>>\n");
+            System.out.print(" >>>>>Product  "+products.getId()+" is gonna run out !\n");
+            System.out.print(" >>>>>Only "+products.getAmountInWarehouse()+" stocks left!\n");
+            System.out.print(" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+        }
     }
 
 
