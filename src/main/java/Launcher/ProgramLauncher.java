@@ -73,7 +73,7 @@ public class ProgramLauncher
                     " AMOUNT_STORAGE INT     NOT NULL," +
                     " AMOUNT_DEFECT  INT     NOT NULL," +
                     " MINIMAL_AMOUNT INT     NOT NULL," +
-                    " CATEGORY_CODE  INT      ," +
+                    " CATEGORY_CODE  INT         ," +
                     " FOREIGN KEY(CATEGORY_CODE) REFERENCES CATEGORY(ID) ON UPDATE CASCADE ON DELETE SET NULL);";
             stmt.executeUpdate(sql);
             stmt.close();
