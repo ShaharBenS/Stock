@@ -13,6 +13,7 @@ public class CategoryManagement
 {
     private Category_Data _CD;
     private Product_Data PD;
+
     public CategoryManagement(Category_Data cd, Product_Data pd)
     {
         _CD = cd;
@@ -39,13 +40,6 @@ public class CategoryManagement
 
         } catch (Exception e) { return false; }
         return _CD.addCategory(c);
-    }
-    /*
-        If category not found returns NULL
-     */
-    public Category getCategory(int id)
-    {
-        return _CD.getCategory(id);
     }
 
     public boolean updateCategoryId(String line)

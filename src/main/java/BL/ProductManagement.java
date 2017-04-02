@@ -39,12 +39,6 @@ public class ProductManagement
         return PD.addProduct(p);
     }
 
-    //RETURN PRODUCT FROM DATABASE IF EXISTS, ELSE RETURN NULL
-    public Products getProduct(int id)
-    {
-        return PD.getProduct(id);
-    }
-
     public boolean updateProductId(String ids)
     {
         String[] sid = ids.split("\\s+");

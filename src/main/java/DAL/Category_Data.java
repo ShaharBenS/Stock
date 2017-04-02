@@ -37,23 +37,7 @@ public class  Category_Data
         }
 
     }
-    public boolean categoryExists(int id)
-    {
-        String query = "SELECT * FROM CATEGORY WHERE ID = "+id+";";
-        try
-        {
-            Statement statement = connection.createStatement();
-            ResultSet result = statement.executeQuery(query);
-            if(!result.next())
-            {
-                return false;
-            }
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return true;
-        }
-    }
+
     /*
         If category not found returns NULL
      */

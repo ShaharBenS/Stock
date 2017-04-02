@@ -6,10 +6,13 @@ import DAL.Category_Data;
 import DAL.Product_Data;
 import Launcher.ProgramLauncher;
 import SharedClasses.Category;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -50,6 +53,18 @@ public class BLTester {
         assertEquals(CD.getCategory(100).equals(new Category(c1)),true);
         assertEquals(CD.getCategory(101).equals(new Category(c2)),true);
 
+    }
+
+    @After
+    public void  tearDown() throws SQLException {
+        connection.close();
+        connection = null;
+        PD = null;
+        CD = null;
+        CM = null;
+        PM = null;
+        File db = new File("tests.db");
+        db.delete();
     }
 
 }
