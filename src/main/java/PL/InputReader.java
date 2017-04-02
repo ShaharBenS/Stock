@@ -202,7 +202,7 @@ public class InputReader
 
     private void printUpdate(boolean arg)
     {
-        if(arg) System.out.print(" >> Product updated successfully\n");
+        if(arg) System.out.print(" >> Updated successfully\n");
         else System.out.print(" >> Invalid arguments. Try again\n");
     }
 }
