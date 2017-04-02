@@ -10,7 +10,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -54,17 +53,16 @@ public class BLTester {
         assertEquals(CD.getCategory(101).equals(new Category(c2)),true);
 
     }
-
-    @After
-    public void  tearDown() throws SQLException {
-        connection.close();
-        connection = null;
+    @After public void tearDown()
+    {
         PD = null;
         CD = null;
-        CM = null;
         PM = null;
-        File db = new File("tests.db");
-        db.delete();
+        CM = null;
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
-
 }

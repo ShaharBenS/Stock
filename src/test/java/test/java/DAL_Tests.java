@@ -3,6 +3,7 @@ package test.java;
 import DAL.*;
 import Launcher.ProgramLauncher;
 import SharedClasses.Category;
+import SharedClasses.Date;
 import SharedClasses.Products;
 import org.junit.*;
 
@@ -99,14 +100,75 @@ public class DAL_Tests
 
         Products [] productss = PD.getAllProductsbyCat(categories);
 
-        System.out.println(productss.length);
-
+        assertEquals(productss[0].equals(p1),true);
+        assertEquals(productss[1].equals(p3),true);
+        assertEquals(productss[2].equals(p2),true);
 
     }
-    @Test public void products_testUpdate()
+    @Test public void products_testUpdate1()
     {
+        Category c1 = new Category(0,"C-0");
+        Category c2 = new Category(1,"C-1",0);
+        CD.addCategory(c1);CD.addCategory(c2);
+        Products p1 = new Products(0,"L-0","M-0",1,1,0,
+                1,2,10);
+        PD.addProduct(p1);
+
+        p1.setDateStartDiscount(new Date("20.10.2014"));
+        PD.updateStartDate(p1.getId(),new Date("20.10.2014"));
+        assertEquals(PD.getProduct(p1.getId()).equals(p1),true);
+    }
+    @Test public void products_testUpdateCategoryDiscount()
+    {
+        Category c1 = new Category(0,"C-0");
+        Category c2 = new Category(1,"C-1",0);
+        Category c3 = new Category(2,"C-2",1);
+        Category c4 = new Category(3,"C-3",0);
+        CD.addCategory(c1);CD.addCategory(c2);CD.addCategory(c3);CD.addCategory(c4);
+
+        Products p1 = new Products(0,"L-0","M-0",1,1,0,0,2,10);
+        Products p2 = new Products(1,"L-1","M-1",1,1,0,2,2,10);
+        Products p3 = new Products(2,"L-2","M-2",1,1,0,3,2,10);
+        PD.addProduct(p1);PD.addProduct(p2);PD.addProduct(p3);
+
+        PD.updateCategoryDiscount(0,20,new Date("20.10.2014"),new Date("20.10.2015"));
+
+        p1.setDiscount(20);
+        p1.setDateStartDiscount(new Date("20.10.2014"));
+        p1.setDateEndDiscount(new Date("20.10.2015"));
+        p2.setDiscount(20);
+        p2.setDateStartDiscount(new Date("20.10.2014"));
+        p2.setDateEndDiscount(new Date("20.10.2015"));
+        p3.setDiscount(20);
+        p3.setDateStartDiscount(new Date("20.10.2014"));
+        p3.setDateEndDiscount(new Date("20.10.2015"));
+
+        assertEquals(PD.getProduct(p1.getId()).equals(p1),true);
+        assertEquals(PD.getProduct(p2.getId()).equals(p2),true);
+        assertEquals(PD.getProduct(p3.getId()).equals(p3),true);
+    }
+    @Test public void products_testGetAllProducts()
+    {
+        Category c1 = new Category(0,"C-0");
+        Category c2 = new Category(1,"C-1",0);
+        CD.addCategory(c1);CD.addCategory(c2);
+
+        Products p1 = new Products(0,"L-0","M-0",1,1,0,
+                0,2,10);
+        Products p2 = new Products(1,"L-1","M-1",1,1,0,
+                1,2,10);
+        Products p3 = new Products(2,"L-2","M-2",1,1,0,
+                1,2,10);
+        PD.addProduct(p1);PD.addProduct(p2);PD.addProduct(p3);
+
+        Products [] p = PD.getAllProducts();
+        assertEquals(p[0].equals(p1),true);
+        assertEquals(p[1].equals(p2),true);
+        assertEquals(p[2].equals(p3),true);
 
     }
+
+
     @Test public void price_testUpdate()
     {
         Category c1 = new Category(0, "CATEGORY_0");
@@ -162,7 +224,7 @@ public class DAL_Tests
 
     }
 
-    @After public void  tearDown() throws SQLException {
+    @After public void tearDown() throws SQLException {
         connection.close();
         connection = null;
         PD = null;

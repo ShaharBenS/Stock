@@ -37,7 +37,19 @@ public class  Category_Data
         }
 
     }
-
+    public boolean categoryExists(int id)
+    {
+        String query = "SELECT * FROM CATEGORY WHERE ID = "+id+";";
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery(query);
+            return result.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return true;
+        }
+    }
     /*
         If category not found returns NULL
      */
@@ -69,9 +81,8 @@ public class  Category_Data
             PreparedStatement _ps = connection.prepareStatement(query);
             _ps.setInt(1, newID);
             _ps.setInt(2, id);
-            _ps.executeUpdate();
-
-            return true;
+            int result = _ps.executeUpdate();
+            return result > 0;
 
         } catch (SQLException e)
         {
@@ -85,9 +96,7 @@ public class  Category_Data
             PreparedStatement _ps = connection.prepareStatement(query);
             _ps.setString(1, name);
             _ps.setInt(2, id);
-            _ps.executeUpdate();
-
-            return true;
+            return _ps.executeUpdate() > 0;
 
         } catch (SQLException e)
         {
@@ -102,9 +111,8 @@ public class  Category_Data
              PreparedStatement _ps = connection.prepareStatement(query);
             _ps.setInt(1, newFatherId);
             _ps.setInt(2, id);
-            _ps.executeUpdate();
+            return _ps.executeUpdate()>0;
 
-            return true;
 
         } catch (SQLException e)
         {

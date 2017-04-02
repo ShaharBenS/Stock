@@ -282,8 +282,11 @@ public class Product_Data
         String query = "UPDATE PRODUCTS SET "+columnName+" = '"+newValue+"' WHERE ID = "+id+";";
         try {
             Statement _ps = connection.createStatement();
-            _ps.executeUpdate(query);
-
+            int result = _ps.executeUpdate(query);
+            if(result <= 0)
+            {
+                return false;
+            }
             return true;
 
         } catch (SQLException e)

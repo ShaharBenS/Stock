@@ -61,7 +61,7 @@ public class Products
                 && this.discount == products.discount;
         boolean condition2 =((this.dateStartDiscount == null) ? null == products.dateStartDiscount :
                 this.dateStartDiscount.equals(products.dateStartDiscount)) &&
-                ((this.dateStartDiscount == null) ? this.dateStartDiscount == products.dateStartDiscount :
+                ((this.dateEndDiscount == null) ? null == products.dateEndDiscount :
                         this.dateEndDiscount.equals(products.dateEndDiscount));
         return condition1 && condition2;
     }
@@ -182,12 +182,26 @@ public class Products
 
     public void setDateStartDiscount(String date_start)
     {
-        this.dateStartDiscount = date_start.equals("NULL") ? null : new Date(date_start);
+        if(date_start == null)
+        {
+            dateStartDiscount = null;
+        }
+        else
+        {
+            this.dateStartDiscount = date_start.equals("NULL") ? null : new Date(date_start);
+        }
     }
 
     public void setDateEndDiscount(String date_end)
     {
-        this.dateEndDiscount = date_end.equals("NULL") ? null : new Date(date_end);
+        if(date_end == null)
+        {
+            dateEndDiscount = null;
+        }
+        else
+        {
+            this.dateEndDiscount = date_end.equals("NULL") ? null : new Date(date_end);
+        }
     }
 
     public String toString()
